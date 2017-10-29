@@ -39,6 +39,8 @@ public class Login extends JPanel {
 		textField2.setColumns(7);
 		
 		login = new JButton("Login");
-		panel.add(login);
+//		panel.add(login);
+		
 	}
+	
 }

@@ -10,10 +10,11 @@ public class POS {
 		doIt();
 	}
 
-	private static void doIt() throws IOException {
+	private static void doIt() throws IOException 
+	{
 		JFrame POS = new JFrame("Point of Sales System");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		screenSize.setSize(screenSize.getWidth(), screenSize.getHeight()- 40);
+		screenSize.setSize(800, 600);
 		POS.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		POS.setSize(screenSize);
 		POS.setResizable(false);
