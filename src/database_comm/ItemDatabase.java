@@ -19,37 +19,42 @@ public class ItemDatabase
 		}
 	}
 
+	//Returns an item with the given barcode from the database. null if not found
 	public static Item getItemFromBarcode(String barcode)
 	{
 		//Create and execute query to find item with matching barcode
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM ITEMS WHERE BARCODE = '" + barcode + "'";
 		ResultSet rs = connection.executeQuery(query);
+
+		//Set up our return item with null by default
+		Item returnItem = null;
 		
 		try
 		{
 			//Check if our query got any results
 			if (rs.next())
 			{
-				//If so, return item with variables assigned
-				Item returnItem = new Item();
+				//If so, create user instance from result data
+				returnItem = new Item();
 				returnItem.barcode = barcode;
 				returnItem.description = rs.getString("DESCR");
 				returnItem.price = (int)(rs.getFloat("PRICE") * 100);
-				return returnItem;
 			}
 			else
 			{
-				//If not, return null
+				//If not, print that the item was not found
 				System.out.println("Item with barcode " + barcode + " not found");
-				return null;
 			}
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-			return null;
 		}
+		
+		//Close the connection and return our results
+		connection.close();		
+		return returnItem;
 
 	}
 

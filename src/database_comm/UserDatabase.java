@@ -18,7 +18,8 @@ public class UserDatabase
 			return username + ", " + passwordHash + ", " + firstName + " " + lastName + (isAdmin ? ", admin" : ", user");
 		}
 	}
-	
+
+	//Returns an user with the given credentials from the database. null if not found
 	public static User getUserFromLogin(String username, String passwordHash)
 	{
 
@@ -26,33 +27,37 @@ public class UserDatabase
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM USERS WHERE USERNAME = '" + username + "' AND PASS_HASH = '" +  passwordHash + "'";
 		ResultSet rs = connection.executeQuery(query);
-
+		
+		//Set up our return user with null by default
+		User returnUser = null;
+		
 		try
 		{
 			//Check if our query got any results
 			if (rs.next())
 			{
-				//If so, return item with variables assigned
-				User returnUser = new User();
+				//If so, create user instance from result data
+				returnUser = new User();
 				returnUser.username = rs.getString("USERNAME");
 				returnUser.passwordHash = rs.getString("PASS_HASH");
 				returnUser.firstName = rs.getString("FIRST");
 				returnUser.lastName = rs.getString("LAST");
 				returnUser.isAdmin = rs.getBoolean("IS_ADMIN");
-				return returnUser;
 			}
 			else
 			{
-				//If not, return null
+				//If not, print that the user was not found
 				System.out.println("User with the given credentials not found");
-				return null;
 			}			
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-			return null;
 		}
+		
+		//Close the connection and return our results
+		connection.close();		
+		return returnUser;
 	}
 
 
