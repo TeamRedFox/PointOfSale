@@ -11,10 +11,11 @@ public class UserDatabase
 		public String passwordHash;
 		public String firstName;
 		public String lastName;
+		public boolean isAdmin;
 
 		public String toString()
 		{
-			return username + ", " + passwordHash + ", " + firstName + " " + lastName;
+			return username + ", " + passwordHash + ", " + firstName + " " + lastName + (isAdmin ? ", admin" : ", user");
 		}
 	}
 	
@@ -37,6 +38,7 @@ public class UserDatabase
 				returnUser.passwordHash = rs.getString("PASS_HASH");
 				returnUser.firstName = rs.getString("FIRST");
 				returnUser.lastName = rs.getString("LAST");
+				returnUser.isAdmin = rs.getBoolean("IS_ADMIN");
 				return returnUser;
 			}
 			else
