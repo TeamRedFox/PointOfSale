@@ -28,7 +28,7 @@ public class UserDatabase
 				returnUser.setPaswordHash(passwordHash);
 				returnUser.setFirstName(rs.getString("FIRST"));
 				returnUser.setLastName(rs.getString("LAST"));
-				returnUser.setAdmin(rs.getBoolean("IS_ADMIN"));
+				returnUser.setAdmin(rs.getString("IS_ADMIN").equals("Y"));
 			}
 			else
 			{
@@ -56,7 +56,7 @@ public class UserDatabase
 		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) "
 				+ "VALUES ('" + user.getUsername() + "', '" + user.getPaswordHash() + "', '"
 				+ user.getFirstName() + "', '" + user.getLastName() +
-				"', " + (user.isAdmin() ? "1" : "0" ) + ")";
+				"', '" + (user.isAdmin() ? "Y" : "N" ) + "')";
 		System.out.println(query);
 		connection.execute(query);
 		

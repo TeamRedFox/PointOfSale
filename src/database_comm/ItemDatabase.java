@@ -28,7 +28,7 @@ public class ItemDatabase
 				returnItem = new Item(barcode);
 				returnItem.setDescription(rs.getString("DESCR"));
 				returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
-				returnItem.setTaxable(rs.getBoolean("IS_TAXABLE"));
+				returnItem.setTaxable(rs.getString("IS_TAXABLE").equals("Y"));
 			}
 			else
 			{
@@ -58,8 +58,8 @@ public class ItemDatabase
 		//TODO deal with placeholder ITEM_NO and COST values
 		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST, IS_TAXABLE) "
 				+ "VALUES ('" + item.getBarcode() + "', '" + item.getBarcode() + "', '" + item.getDescription()
-				+ "', " + item.getPriceString() + ", '1.00', "+ (item.isTaxable() ? "1" : "0") +")";
-		//System.out.println(query);
+				+ "', " + item.getPriceString() + ", " + item.getPriceString() + ", '"+ (item.isTaxable() ? "Y" : "N") +"')";
+		System.out.println(query);
 		boolean successful = connection.execute(query);
 		
 		connection.close();
