@@ -49,7 +49,7 @@ public class ItemDatabase
 	
 	
 	//Adds the given item to the database, returns true if successful
-	public static boolean addItemToDatabase(Item item)
+	public static boolean addItem(Item item)
 	{
 		//Create database connection
 		DatabaseConnection connection = new DatabaseConnection();

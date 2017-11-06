@@ -47,7 +47,7 @@ public class UserDatabase
 	}
 	
 	//Adds the given user to the database, returns true if successful
-	public static boolean addUserToDatabase(User user)
+	public static boolean addUser(User user)
 	{
 		//Create database connection
 		DatabaseConnection connection = new DatabaseConnection();
