@@ -58,10 +58,10 @@ public class UserDatabase
 				+ user.getFirstName() + "', '" + user.getLastName() +
 				"', '" + (user.isAdmin() ? "Y" : "N" ) + "')";
 		System.out.println(query);
-		connection.execute(query);
-		
-		
-		return false;
+		boolean successful = connection.execute(query);
+
+		connection.close();
+		return successful;
 	}
 	
 	//Placeholder get cash string
