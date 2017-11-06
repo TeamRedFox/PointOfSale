@@ -59,6 +59,21 @@ public class DatabaseConnection
 		}
 	}
 	
+	
+	//Executes a SQL statement, returns true it successful
+	public boolean execute(String sql)
+	{
+		try
+		{
+			return statement.execute(sql);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	//Close all connections in this object
 	public void close()
 	{

@@ -1,5 +1,8 @@
 package database_comm;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import retail.RetailHelper;
 
 public class ItemDatabase
 {
@@ -35,7 +38,7 @@ public class ItemDatabase
 			//Check if our query got any results
 			if (rs.next())
 			{
-				//If so, create user instance from result data
+				//If so, create item instance from result data
 				returnItem = new Item();
 				returnItem.barcode = barcode;
 				returnItem.description = rs.getString("DESCR");
@@ -56,6 +59,34 @@ public class ItemDatabase
 		connection.close();		
 		return returnItem;
 
+	}
+	
+	
+	//Adds the given item to the database, returns true if successful
+	public static boolean addItemToDatabase(Item item)
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+		
+		//Set up query to insert into ITEMS table and execute it
+		//TODO deal with placeholder ITEM_NO and COST values
+		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST) "
+				+ "VALUES ('" + item.barcode + "', '" + item.barcode + "', '" + item.description + "', " + getCashString(item.price) + ", '1.00')";
+		//System.out.println(query);
+		connection.execute(query);
+		
+		
+		return false;
+	}
+	
+	//Placeholder get cash string
+	//TODO remove
+	public static String getCashString(int amount)
+	{
+		int cents = amount % 100;
+		int dollars = amount - cents;
+		dollars /= 100;
+		return dollars + "." + cents;
 	}
 
 }

@@ -23,7 +23,7 @@ public class UserDatabase
 	public static User getUserFromLogin(String username, String passwordHash)
 	{
 
-		//Create and execute query to find item with matching barcode
+		//Create and execute query to find user with matching credentials
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM USERS WHERE USERNAME = '" + username + "' AND PASS_HASH = '" +  passwordHash + "'";
 		ResultSet rs = connection.executeQuery(query);
@@ -58,6 +58,33 @@ public class UserDatabase
 		//Close the connection and return our results
 		connection.close();		
 		return returnUser;
+	}
+	
+	//Adds the given user to the database, returns true if successful
+	public static boolean addUserToDatabase(User user)
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+
+		//Set up query to insert into USERS table and execute it
+		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) "
+				+ "VALUES ('" + user.username + "', '" + user.passwordHash + "', '" + user.firstName + "', '" + user.lastName +
+				"', " + (user.isAdmin ? "1" : "0" ) + ")";
+		//System.out.println(query);
+		connection.execute(query);
+		
+		
+		return false;
+	}
+	
+	//Placeholder get cash string
+	//TODO remove
+	public static String getCashString(int amount)
+	{
+		int cents = amount % 100;
+		int dollars = amount - cents;
+		dollars /= 100;
+		return dollars + "." + cents;
 	}
 
 
