@@ -51,6 +51,12 @@ public class Item
 		this.taxable = taxable;
 	}
 	
+	/**Returns price string for this item's price, formatted with RetailHelper.getCashString()*/
+	public String getPriceString()
+	{
+		return RetailHelper.getCashString(price);
+	}
+	
 	//TODO better toString representation
 	public String toString()
 	{
