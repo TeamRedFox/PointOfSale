@@ -15,9 +15,10 @@ public class DatabaseConnection
 	static final String PASS = "brianbrian";
 	
 	//Debug localhost string
-	static final String connectionUrl = "jdbc:sqlserver://150.250.147.167:1433;DatabaseName=REDFOX;user=sa;password=brianbrian;";
-	//Debug RBMS string
-	//String connectionUrl = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=Brian;password=brianbrian;";
+	//static final String connectionUrl = "jdbc:sqlserver://150.250.147.167:1433;DatabaseName=REDFOX;user=sa;password=brianbrian;";
+	
+	//Debug online string
+	String connectionUrl = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=brian;password=brianbrian;";
 	
 	private Connection connection;
 	private Statement statement;
