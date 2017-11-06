@@ -1,24 +1,11 @@
 package database_comm;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import login.User;
 
 public class UserDatabase
 {
-	//Debug user class for SQL connection
-	//TODO remove
-	public static class User
-	{
-		public String username;
-		public String passwordHash;
-		public String firstName;
-		public String lastName;
-		public boolean isAdmin;
-
-		public String toString()
-		{
-			return username + ", " + passwordHash + ", " + firstName + " " + lastName + (isAdmin ? ", admin" : ", user");
-		}
-	}
-
 	//Returns an user with the given credentials from the database. null if not found
 	public static User getUserFromLogin(String username, String passwordHash)
 	{
@@ -37,12 +24,11 @@ public class UserDatabase
 			if (rs.next())
 			{
 				//If so, create user instance from result data
-				returnUser = new User();
-				returnUser.username = rs.getString("USERNAME");
-				returnUser.passwordHash = rs.getString("PASS_HASH");
-				returnUser.firstName = rs.getString("FIRST");
-				returnUser.lastName = rs.getString("LAST");
-				returnUser.isAdmin = rs.getBoolean("IS_ADMIN");
+				returnUser = new User(username);
+				returnUser.setPaswordHash(passwordHash);
+				returnUser.setFirstName(rs.getString("FIRST"));
+				returnUser.setLastName(rs.getString("LAST"));
+				returnUser.setAdmin(rs.getBoolean("IS_ADMIN"));
 			}
 			else
 			{
@@ -68,9 +54,10 @@ public class UserDatabase
 
 		//Set up query to insert into USERS table and execute it
 		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) "
-				+ "VALUES ('" + user.username + "', '" + user.passwordHash + "', '" + user.firstName + "', '" + user.lastName +
-				"', " + (user.isAdmin ? "1" : "0" ) + ")";
-		//System.out.println(query);
+				+ "VALUES ('" + user.getUsername() + "', '" + user.getPaswordHash() + "', '"
+				+ user.getFirstName() + "', '" + user.getLastName() +
+				"', " + (user.isAdmin() ? "1" : "0" ) + ")";
+		System.out.println(query);
 		connection.execute(query);
 		
 		
