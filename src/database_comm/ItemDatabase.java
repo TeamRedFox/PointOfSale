@@ -8,7 +8,7 @@ import retail.Item;
 public class ItemDatabase
 {
 
-	//Returns an item with the given barcode from the database. null if not found
+	/**Returns an item with the given barcode from the database. null if not found*/
 	public static Item getItemFromBarcode(String barcode)
 	{
 		//Create and execute query to find item with matching barcode
@@ -48,7 +48,7 @@ public class ItemDatabase
 	}
 	
 	
-	//Adds the given item to the database, returns true if successful
+	/**Adds the given item to the database, returns true if successful*/
 	public static boolean addItem(Item item)
 	{
 		//Create database connection

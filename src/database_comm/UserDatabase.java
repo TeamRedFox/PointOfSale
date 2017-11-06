@@ -6,7 +6,7 @@ import login.User;
 
 public class UserDatabase
 {
-	//Returns an user with the given credentials from the database. null if not found
+	/**Returns an user with the given credentials from the database. null if not found*/
 	public static User getUserFromLogin(String username, String passwordHash)
 	{
 
@@ -46,7 +46,7 @@ public class UserDatabase
 		return returnUser;
 	}
 	
-	//Adds the given user to the database, returns true if successful
+	/**Adds the given user to the database, returns true if successful*/
 	public static boolean addUser(User user)
 	{
 		//Create database connection
