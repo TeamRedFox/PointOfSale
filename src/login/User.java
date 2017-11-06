@@ -3,7 +3,7 @@ package login;
 public class User
 {
 	private String username;
-	private String paswordHash;
+	private String passwordHash;
 	private String firstName;
 	private String lastName;
 	private boolean isAdmin;
@@ -25,12 +25,12 @@ public class User
 
 	public String getPaswordHash()
 	{
-		return paswordHash;
+		return passwordHash;
 	}
 
 	public void setPaswordHash(String paswordHash)
 	{
-		this.paswordHash = paswordHash;
+		this.passwordHash = paswordHash;
 	}
 
 	public String getFirstName()
