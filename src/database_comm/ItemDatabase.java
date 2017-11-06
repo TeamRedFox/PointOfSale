@@ -3,24 +3,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import retail.RetailHelper;
+import retail.Item;
 
 public class ItemDatabase
 {
-
-	//Debug item class for SQL connection
-	//TODO remove
-	public static class Item
-	{
-		public String barcode;
-		public String description;
-		public int price;
-		//public int cost;
-
-		public String toString()
-		{
-			return barcode + ", " + description + ", " + price;
-		}
-	}
 
 	//Returns an item with the given barcode from the database. null if not found
 	public static Item getItemFromBarcode(String barcode)
@@ -39,10 +25,10 @@ public class ItemDatabase
 			if (rs.next())
 			{
 				//If so, create item instance from result data
-				returnItem = new Item();
-				returnItem.barcode = barcode;
-				returnItem.description = rs.getString("DESCR");
-				returnItem.price = (int)(rs.getFloat("PRICE") * 100);
+				returnItem = new Item(barcode);
+				returnItem.setDescription(rs.getString("DESCR"));
+				returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
+				returnItem.setTaxable(rs.getBoolean("IS_TAXABLE"));
 			}
 			else
 			{
@@ -70,23 +56,14 @@ public class ItemDatabase
 		
 		//Set up query to insert into ITEMS table and execute it
 		//TODO deal with placeholder ITEM_NO and COST values
-		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST) "
-				+ "VALUES ('" + item.barcode + "', '" + item.barcode + "', '" + item.description + "', " + getCashString(item.price) + ", '1.00')";
+		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST, IS_TAXABLE) "
+				+ "VALUES ('" + item.getBarcode() + "', '" + item.getBarcode() + "', '" + item.getDescription()
+				+ "', " + item.getPriceString() + ", '1.00', "+ (item.isTaxable() ? "1" : "0") +")";
 		//System.out.println(query);
-		connection.execute(query);
+		boolean successful = connection.execute(query);
 		
-		
-		return false;
-	}
-	
-	//Placeholder get cash string
-	//TODO remove
-	public static String getCashString(int amount)
-	{
-		int cents = amount % 100;
-		int dollars = amount - cents;
-		dollars /= 100;
-		return dollars + "." + cents;
+		connection.close();
+		return successful;
 	}
 
 }
