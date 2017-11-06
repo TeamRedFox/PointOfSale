@@ -68,4 +68,10 @@ public class User
 		return firstName + " " + lastName;
 	}
 	
+	//TODO better toString representation
+	public String toString()
+	{
+		return username + ", " + passwordHash + ", " + getFullName() + (isAdmin ? ", admin" : ", normal");
+	}
+	
 }
