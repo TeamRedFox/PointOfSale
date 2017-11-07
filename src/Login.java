@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -77,10 +79,16 @@ public class Login extends JPanel {
 				System.out.println("0");
 				String username = textField.getText();
 				passwords = new String(passwordField_1.getPassword());
-				User newUser = UserDatabase.getUserFromLogin(username, passwords);
-				System.out.println(newUser);
-				if(newUser != null) {
-					//selectionScreen();
+				User newUser;
+				try {
+					newUser = UserDatabase.getUserFromLogin(username, passwords);
+					System.out.println(newUser);
+					if(newUser != null) {
+						//selectionScreen();
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});	
