@@ -1,46 +1,86 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import database_comm.UserDatabase;
+
 
 public class Login extends JPanel {
-	protected JButton login;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	static JPanel contentPane;
+	private JTextField textField;
+	private JPasswordField passwordField_1;
 	
 	public Login(JFrame POS) {
-		//Login LI = new Login(POS);
+		//SelctionScreen SS = new SelectionScreen(POS);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		POS.setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
 		Point p = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
 		
-		setLayout(new BorderLayout(p.x, p.y));
+		contentPane.setMaximumSize(new Dimension(200, 100));
+		contentPane.setMinimumSize(new Dimension(100, 100));
+		contentPane.setPreferredSize(new Dimension(200, 100));
+		contentPane.setLocation(p.x, p.y);
+		contentPane.setBounds(p.x, p.y, 200, 100);
 		
-		Panel panelN = new Panel();
-		//add(panelN, BorderLayout.NORTH);
+		JPanel panel = new JPanel();
 		
-		Panel panel = new Panel();
-		panel.setBackground(Color.WHITE);
+		panel.setMaximumSize(new Dimension(200, 100));
+		panel.setMinimumSize(new Dimension(100, 100));
+		panel.setPreferredSize(new Dimension(200, 100));
+		panel.setLocation(p.x, p.y);
+		panel.setBounds(553, 329, 200, 100);
+		panel.setLayout(null);
+		contentPane.add(panel);
 		
-		panel.setMaximumSize(new Dimension(100,100));
-		panel.setLocation(p);
-		add(panel);
+		JTextPane txtpnUsername = new JTextPane();
+		txtpnUsername.setBounds(11, 10, 66, 16);
+		txtpnUsername.setEditable(false);
+		txtpnUsername.setText("Username:");
 		
-		JTextArea text1 = new JTextArea();
-		panel.add(text1);
-		text1.setEditable(false);
-		text1.setText("Username: ");
+		textField = new JTextField();
+		textField.setBounds(82, 5, 106, 26);
+		textField.setColumns(8);
 		
-		JTextField textField = new JTextField();
+		JTextPane txtpnPassword = new JTextPane();
+		txtpnPassword.setBounds(13, 41, 63, 16);
+		txtpnPassword.setEditable(false);
+		txtpnPassword.setText("Password:");
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(81, 36, 106, 26);
+		passwordField_1.setColumns(8);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.add(txtpnUsername);
 		panel.add(textField);
-		textField.setColumns(7);
+		panel.add(txtpnPassword);
+		panel.add(passwordField_1);
 		
-		JTextArea text2 = new JTextArea();
-		panel.add(text2);
-		text2.setEditable(false);
-		text2.setText("Password: ");
+		JButton btnLogin = new JButton("Login");
+		panel.add(btnLogin);
 		
-		JTextField textField2 = new JTextField();
-		panel.add(textField2);
-		textField2.setColumns(7);
-		
-		login = new JButton("Login");
-//		panel.add(login);
+		btnLogin.addActionListener(new ActionListener () {
+			protected String passwords;
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("0");
+				String username = textField.getText();
+				passwords = new String(passwordField_1.getPassword());
+				UserDatabase.getUserFromLogin(username, passwords);
+			}
+
+			
+		});
 		
 	}
-	
 }
