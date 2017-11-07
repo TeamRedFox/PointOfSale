@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import database_comm.UserDatabase;
+import login.User;
 
 
 public class Login extends JPanel {
@@ -76,11 +77,12 @@ public class Login extends JPanel {
 				System.out.println("0");
 				String username = textField.getText();
 				passwords = new String(passwordField_1.getPassword());
-				UserDatabase.getUserFromLogin(username, passwords);
+				User newUser = UserDatabase.getUserFromLogin(username, passwords);
+				System.out.println(newUser);
+				if(newUser != null) {
+					//selectionScreen();
+				}
 			}
-
-			
-		});
-		
+		});	
 	}
 }
