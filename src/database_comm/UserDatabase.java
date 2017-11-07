@@ -27,6 +27,8 @@ public class UserDatabase
 			returnUser.setFirstName(rs.getString("FIRST"));
 			returnUser.setLastName(rs.getString("LAST"));
 			returnUser.setAdmin(rs.getString("IS_ADMIN").equals("Y"));
+
+			System.out.println("User retrieved successfully");
 		}
 		else
 		{

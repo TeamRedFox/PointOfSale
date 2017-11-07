@@ -27,6 +27,8 @@ public class ItemDatabase
 			returnItem.setDescription(rs.getString("DESCR"));
 			returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
 			returnItem.setTaxable(rs.getString("IS_TAXABLE").equals("Y"));
+			
+			System.out.println("Item retrieved successfully");
 		}
 		else
 		{
