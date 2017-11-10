@@ -3,7 +3,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import login.User;
-import login.InvalidUsernameOrPasswordException;
 
 public class UserDatabase
 {
@@ -15,10 +14,10 @@ public class UserDatabase
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM USERS WHERE USERNAME = '" + username + "' AND PASS_HASH = '" +  passwordHash + "'";
 		ResultSet rs = connection.executeQuery(query);
-
+		
 		//Set up our return user with null by default
 		User returnUser = null;
-
+		
 		//Check if our query got any results
 		if (rs.next())
 		{
@@ -34,33 +33,14 @@ public class UserDatabase
 		else
 		{
 			//If not, print that the user was not found
-
-			if (username.isEmpty()) {
-				throw new InvalidUsernameOrPasswordException("empty");
-			}
-			else if (passwordHash.isEmpty()) {
-				throw new InvalidUsernameOrPasswordException("empty");
-			}
-			else {
-				System.out.println("User with the given credentials not found.");
-				throw new InvalidUsernameOrPasswordException("invalid");
-			}
-			//			else if (!usernameInUse(username)) {
-			//				throw new InvalidUsernameOrPasswordException("username");
-			//			}
-			//			else if (usernameInUse(username) & !users.get(username).getPassword().equals(password)) {
-			//				throw new InvalidUsernameOrPasswordException("password");
-			//			}
-			//			else if (usernameInUse(username) & users.get(username).getPassword().equals(password)) {
-			//				currentUser = users.get(username);
-			//			}
+			System.out.println("User with the given credentials not found");
 		}
-
+		
 		//Close the connection and return our results
 		connection.close();		
 		return returnUser;
 	}
-
+	
 	/**Adds the given user to the database, returns true if successful*/
 	public static boolean addUser(User user) throws SQLException
 	{
@@ -78,7 +58,7 @@ public class UserDatabase
 		connection.close();
 		return successful;
 	}
-
+	
 	//Placeholder get cash string
 	//TODO remove
 	public static String getCashString(int amount)
