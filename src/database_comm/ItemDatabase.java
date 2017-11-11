@@ -8,7 +8,8 @@ import retail.Item;
 public class ItemDatabase
 {
 
-	/**Returns an item with the given barcode from the database. null if not found*/
+	/**Returns an item with the given barcode from the database. null if not found
+	 * @throws SQLException */
 	public static Item getItemFromBarcode(String barcode) throws SQLException
 	{
 		//Create and execute query to find item with matching barcode
@@ -19,31 +20,43 @@ public class ItemDatabase
 		//Set up our return item with null by default
 		Item returnItem = null;
 
-		//Check if our query got any results
-		if (rs.next())
+		try
 		{
-			//If so, create item instance from result data
-			returnItem = new Item(barcode);
-			returnItem.setDescription(rs.getString("DESCR"));
-			returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
-			returnItem.setTaxable(rs.getString("IS_TAXABLE").equals("Y"));
-			
-			System.out.println("Item retrieved successfully");
+			//Check if our query got any results
+			if (rs.next())
+			{
+				//If so, create item instance from result data
+				returnItem = new Item(barcode);
+				returnItem.setDescription(rs.getString("DESCR"));
+				returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
+				returnItem.setTaxable(rs.getString("IS_TAXABLE").equals("Y"));
+				
+				System.out.println("Item retrieved successfully");
+			}
+			else
+			{
+				//If not, print that the item was not found
+				System.out.println("Item with barcode " + barcode + " not found");
+			}
 		}
-		else
+		catch (SQLException e)
 		{
-			//If not, print that the item was not found
-			System.out.println("Item with barcode " + barcode + " not found");
+			//Throw a SQL exception if we run into one
+			throw e;
 		}
-
-		//Close the connection and return our results
-		connection.close();		
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+		
+		//Return our results
 		return returnItem;
-
 	}
 
 
-	/**Adds the given item to the database, returns true if successful*/
+	/**Adds the given item to the database, returns true if successful
+	 * @throws SQLException */
 	public static boolean addItem(Item item) throws SQLException
 	{
 		//Create database connection
@@ -55,9 +68,25 @@ public class ItemDatabase
 				+ "VALUES ('" + item.getBarcode() + "', '" + item.getBarcode() + "', '" + item.getDescription()
 				+ "', " + item.getPriceString() + ", " + item.getPriceString() + ", '"+ (item.isTaxable() ? "Y" : "N") +"')";
 		System.out.println(query);
-		boolean successful = connection.execute(query);
 
-		connection.close();
+		boolean successful = false;
+		//System.out.println(query);
+		try
+		{
+			//Attempt to execute query, storing the item in the database if successful
+			successful = connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
 		return successful;
 	}
 

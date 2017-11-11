@@ -18,44 +18,72 @@ public class UserDatabase
 		//Set up our return user with null by default
 		User returnUser = null;
 		
-		//Check if our query got any results
-		if (rs.next())
+		try
 		{
-			//If so, create user instance from result data
-			returnUser = new User(username);
-			returnUser.setPaswordHash(passwordHash);
-			returnUser.setFirstName(rs.getString("FIRST"));
-			returnUser.setLastName(rs.getString("LAST"));
-			returnUser.setAdmin(rs.getString("IS_ADMIN").equals("Y"));
+			//Check if our query got any results
+			if (rs.next())
+			{
+				//If so, create user instance from result data
+				returnUser = new User(username);
+				returnUser.setPaswordHash(passwordHash);
+				returnUser.setFirstName(rs.getString("FIRST"));
+				returnUser.setLastName(rs.getString("LAST"));
+				returnUser.setAdmin(rs.getString("IS_ADMIN").equals("Y"));
 
-			System.out.println("User retrieved successfully");
+				System.out.println("User retrieved successfully");
+			}
+			else
+			{
+				//If not, print that the user was not found
+				System.out.println("User with the given credentials not found");
+			}
 		}
-		else
+		catch (SQLException e)
 		{
-			//If not, print that the user was not found
-			System.out.println("User with the given credentials not found");
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
 		}
 		
-		//Close the connection and return our results
-		connection.close();		
+		//Return our results
 		return returnUser;
 	}
 	
-	/**Adds the given user to the database, returns true if successful*/
+	/**Adds the given user to the database, returns true if successful
+	 * @throws SQLException */
 	public static boolean addUser(User user) throws SQLException
 	{
 		//Create database connection
 		DatabaseConnection connection = new DatabaseConnection();
 
-		//Set up query to insert into USERS table and execute it
+		//Set up query to insert into USERS table
 		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) "
 				+ "VALUES ('" + user.getUsername() + "', '" + user.getPaswordHash() + "', '"
 				+ user.getFirstName() + "', '" + user.getLastName() +
 				"', '" + (user.isAdmin() ? "Y" : "N" ) + "')";
-		System.out.println(query);
-		boolean successful = connection.execute(query);
 
-		connection.close();
+		boolean successful = false;
+		//System.out.println(query);
+		try
+		{
+			//Attempt to execute query, storing the item in the database if successful
+			successful = connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
 		return successful;
 	}
 	
