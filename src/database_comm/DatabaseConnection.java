@@ -13,80 +13,53 @@ public class DatabaseConnection
 
 	static final String USER = "sa";
 	static final String PASS = "brianbrian";
-	
+
 	//Debug localhost string
 	//static final String connectionUrl = "jdbc:sqlserver://150.250.147.167:1433;DatabaseName=REDFOX;user=sa;password=brianbrian;";
-	
+
 	//Debug online string
 	String connectionUrl = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=brian;password=brianbrian;";
-	
+
 	private Connection connection;
 	private Statement statement;
-	
-	public DatabaseConnection()
+
+	public DatabaseConnection() throws SQLException
 	{
 		try
 		{
 			//I don't know what this line really does
 			//No touch
 			Class.forName(JDBC_DRIVER);
-
-			System.out.println("Connecting to database...");
-			connection = DriverManager.getConnection(connectionUrl);
-			statement = connection.createStatement();
 		}
 		catch (ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
+
+		System.out.println("Connecting to database...");
+		connection = DriverManager.getConnection(connectionUrl);
+		statement = connection.createStatement();
+
 	}
-	
+
 	//Executes and returns results from a given query
-	public ResultSet executeQuery(String query)
+	public ResultSet executeQuery(String query) throws SQLException
 	{
-		try
-		{
-			return statement.executeQuery(query);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-			return null;
-		}
+		return statement.executeQuery(query);
 	}
-	
-	
+
+
 	//Executes a SQL statement, returns true it successful
-	public boolean execute(String sql)
+	public boolean execute(String sql) throws SQLException
 	{
-		try
-		{
-			return statement.execute(sql);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		return statement.execute(sql);
 	}
-	
+
 	//Close all connections in this object
-	public void close()
+	public void close() throws SQLException
 	{
-		try
-		{
-			statement.close();
-			connection.close();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
+		statement.close();
+		connection.close();
 	}
 
 }

@@ -10,18 +10,17 @@ public class POS {
 		doIt();
 	}
 
-	private static void doIt() throws IOException 
-	{
+	private static void doIt() throws IOException {
 		JFrame POS = new JFrame("Point of Sales System");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		screenSize.setSize(800, 600);
+		screenSize.setSize(screenSize.getWidth(), screenSize.getHeight()- 40);
 		POS.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		POS.setSize(screenSize);
 		POS.setResizable(false);
 		POS.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Login LI = new Login(POS);
 		LI.setOpaque(true);
-		POS.setContentPane(LI);
+		//POS.setContentPane(LI);
 		POS.setVisible(true);
 		
 	}
