@@ -2,7 +2,6 @@ package database_comm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import retail.RetailHelper;
 import retail.Item;
 
 public class ItemDatabase
@@ -91,6 +90,48 @@ public class ItemDatabase
 		}
 
 		return successful;
+	}
+
+
+	/**Modifies the item in the database to match the given item, returns true if successful.
+	 * This CANNOT modify the barcode as of right now
+	 * @throws SQLException */
+	public static boolean updateItem(Item item) throws SQLException
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+		
+		//Create SQL query to update all fields of an item
+		//TODO deal with placeholder ITEM_NO and COST values
+		//TODO return false or throw exception if item to update cannot be found
+		String query = "UPDATE ITEMS SET "
+		+ "ITEM_NO = " + DatabaseHelper.formatStringField(item.getBarcode())
+		+ ", BARCODE = " + DatabaseHelper.formatStringField(item.getBarcode())
+		+ ", DESCR = " + DatabaseHelper.formatStringField(item.getDescription())
+		+ ", PRICE = " + item.getPriceString()
+		+ ", COST = " + item.getPriceString()
+		+ ", IS_TAXABLE = " + DatabaseHelper.formatStringField((item.isTaxable() ? "Y" : "N"))
+		+ " WHERE BARCODE = " + DatabaseHelper.formatStringField(item.getBarcode());
+		
+		//System.out.println(query);
+		try
+		{
+			
+			//Attempt to execute query, storing the item in the database if successful
+			connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
+		return true;
 	}
 
 }

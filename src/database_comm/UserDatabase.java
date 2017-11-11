@@ -72,7 +72,7 @@ public class UserDatabase
 		//System.out.println(query);
 		try
 		{
-			//Attempt to execute query, storing the item in the database if successful
+			//Attempt to execute query, storing the user in the database if successful
 			successful = connection.execute(query);
 		}
 		catch(SQLException e)
@@ -87,6 +87,45 @@ public class UserDatabase
 		}
 
 		return successful;
+	}
+
+
+	/**Modifies the user in the database to match the given user, returns true if successful.
+	 * This CANNOT modify the username as of right now
+	 * @throws SQLException */
+	public static boolean updateUser(User user) throws SQLException
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+		
+		//Create SQL query to update all fields of a user
+		//TODO return false or throw exception if user to update cannot be found
+		String query = "UPDATE USERS SET "
+		+ "USERNAME = " + DatabaseHelper.formatStringField(user.getUsername())
+		+ ", PASS_HASH = " + DatabaseHelper.formatStringField(user.getPaswordHash())
+		+ ", FIRST = " + DatabaseHelper.formatStringField(user.getFirstName())
+		+ ", LAST = " + DatabaseHelper.formatStringField(user.getLastName())
+		+ ", IS_ADMIN = " + DatabaseHelper.formatStringField((user.isAdmin() ? "Y" : "N"))
+		+ " WHERE USERNAME = " + DatabaseHelper.formatStringField(user.getUsername());
+		
+		//System.out.println(query);
+		try
+		{
+			//Attempt to execute query, storing the user in the database if successful
+			connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
+		return true;
 	}
 	
 	//Placeholder get cash string
