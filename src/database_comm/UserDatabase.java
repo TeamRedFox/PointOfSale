@@ -61,10 +61,12 @@ public class UserDatabase
 		DatabaseConnection connection = new DatabaseConnection();
 
 		//Set up query to insert into USERS table
-		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) "
-				+ "VALUES ('" + user.getUsername() + "', '" + user.getPaswordHash() + "', '"
-				+ user.getFirstName() + "', '" + user.getLastName() +
-				"', '" + (user.isAdmin() ? "Y" : "N" ) + "')";
+		String query = "INSERT INTO USERS (USERNAME, PASS_HASH, FIRST, LAST, IS_ADMIN) VALUES ("
+		+ DatabaseHelper.formatStringField(user.getUsername()) + ", "
+		+ DatabaseHelper.formatStringField(user.getPaswordHash()) + ", "
+		+ DatabaseHelper.formatStringField(user.getFirstName()) + ", "
+		+ DatabaseHelper.formatStringField(user.getLastName()) + ", "
+		+ DatabaseHelper.formatStringField((user.isAdmin() ? "Y" : "N")) + ")";
 
 		boolean successful = false;
 		//System.out.println(query);

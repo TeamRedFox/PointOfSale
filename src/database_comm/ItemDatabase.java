@@ -64,11 +64,14 @@ public class ItemDatabase
 
 		//Set up query to insert into ITEMS table and execute it
 		//TODO deal with placeholder ITEM_NO and COST values
-		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST, IS_TAXABLE) "
-				+ "VALUES ('" + item.getBarcode() + "', '" + item.getBarcode() + "', '" + item.getDescription()
-				+ "', " + item.getPriceString() + ", " + item.getPriceString() + ", '"+ (item.isTaxable() ? "Y" : "N") +"')";
-		System.out.println(query);
-
+		String query = "INSERT INTO ITEMS (ITEM_NO, BARCODE, DESCR, PRICE, COST, IS_TAXABLE) VALUES ("
+		+ DatabaseHelper.formatStringField(item.getBarcode()) + ", "
+		+ DatabaseHelper.formatStringField(item.getBarcode()) + ", "
+		+ DatabaseHelper.formatStringField(item.getDescription()) + ", "
+		+ item.getPriceString() + ", "
+		+ item.getPriceString() + ", "
+		+ DatabaseHelper.formatStringField((item.isTaxable() ? "Y" : "N")) + ")";
+		
 		boolean successful = false;
 		//System.out.println(query);
 		try
