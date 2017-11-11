@@ -2,14 +2,14 @@ package database_comm;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import retail.RetailHelper;
 import retail.Item;
 
 public class ItemDatabase
 {
 
-	/**Returns an item with the given barcode from the database. null if not found
-	 * @throws SQLException */
-	public static Item getItemFromBarcode(String barcode) throws SQLException
+	/**Returns an item with the given barcode from the database. null if not found*/
+	public static Item getItemFromBarcode(String barcode)
 	{
 		//Create and execute query to find item with matching barcode
 		DatabaseConnection connection = new DatabaseConnection();
@@ -38,16 +38,11 @@ public class ItemDatabase
 		}
 		catch (SQLException e)
 		{
-			//Throw a SQL exception if we run into one
-			throw e;
-		}
-		finally
-		{
-			//Close the connection regardless of whether we encountered an exception
-			connection.close();
+			e.printStackTrace();
 		}
 		
-		//Return our results
+		//Close the connection and return our results
+		connection.close();		
 		return returnItem;
 
 	}

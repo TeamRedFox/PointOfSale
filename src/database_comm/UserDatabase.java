@@ -6,9 +6,8 @@ import login.User;
 
 public class UserDatabase
 {
-	/**Returns an user with the given credentials from the database. null if not found
-	 * @throws SQLException */
-	public static User getUserFromLogin(String username, String passwordHash) throws SQLException
+	/**Returns an user with the given credentials from the database. null if not found*/
+	public static User getUserFromLogin(String username, String passwordHash)
 	{
 
 		//Create and execute query to find user with matching credentials
@@ -39,16 +38,11 @@ public class UserDatabase
 		}
 		catch (SQLException e)
 		{
-			//Throw a SQL exception if we run into one
-			throw e;
-		}
-		finally
-		{
-			//Close the connection regardless of whether we encountered an exception
-			connection.close();
+			e.printStackTrace();
 		}
 		
-		//Return our results		
+		//Close the connection and return our results
+		connection.close();		
 		return returnUser;
 	}
 	
