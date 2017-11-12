@@ -1,5 +1,6 @@
 package database_comm;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import retail.Item;
@@ -11,16 +12,18 @@ public class ItemDatabase
 	 * @throws SQLException */
 	public static Item getItemFromBarcode(String barcode) throws SQLException
 	{
-		//Create and execute query to find item with matching barcode
+		//Create query to find item with matching barcode
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM ITEMS WHERE BARCODE = '" + barcode + "'";
-		ResultSet rs = connection.executeQuery(query);
 
 		//Set up our return item with null by default
 		Item returnItem = null;
 
 		try
 		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			
 			//Check if our query got any results
 			if (rs.next())
 			{
@@ -132,6 +135,48 @@ public class ItemDatabase
 		}
 
 		return true;
+	}
+	
+	/**FOR DEBUG PURPOSES
+	 * Lists all users in the database
+	 * @throws SQLException */
+	public static void printAllItems() throws SQLException
+	{
+		//Create a query to fetch all items
+		DatabaseConnection connection = new DatabaseConnection();
+		String query = "SELECT * FROM ITEMS";
+
+		try
+		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			ResultSetMetaData metaData = rs.getMetaData();
+			
+			//Display all results from our query 
+			while (rs.next())
+			{
+				String row = ""; 
+				for(int i = 1; i <= metaData.getColumnCount(); i++)
+				{
+					row += metaData.getColumnName(i) + ": ";
+					
+					row += rs.getString(i);
+					if (i < metaData.getColumnCount())
+						row += ", ";
+				}
+				System.out.println(row);
+			}
+		}
+		catch (SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
 	}
 
 }

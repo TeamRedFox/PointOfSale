@@ -1,5 +1,6 @@
 package database_comm;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import login.User;
@@ -10,16 +11,18 @@ public class UserDatabase
 	public static User getUserFromLogin(String username, String passwordHash) throws SQLException
 	{
 
-		//Create and execute query to find user with matching credentials
+		//Create query to find user with matching credentials
 		DatabaseConnection connection = new DatabaseConnection();
 		String query = "SELECT * FROM USERS WHERE USERNAME = '" + username + "' AND PASS_HASH = '" +  passwordHash + "'";
-		ResultSet rs = connection.executeQuery(query);
 		
 		//Set up our return user with null by default
 		User returnUser = null;
 		
 		try
 		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			
 			//Check if our query got any results
 			if (rs.next())
 			{
@@ -126,6 +129,48 @@ public class UserDatabase
 		}
 
 		return true;
+	}
+	
+	/**FOR DEBUG PURPOSES
+	 * Lists all users in the database
+	 * @throws SQLException */
+	public static void printAllUsers() throws SQLException
+	{
+		//Create query to fetch all users
+		DatabaseConnection connection = new DatabaseConnection();
+		String query = "SELECT * FROM USERS";
+		
+		try
+		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			ResultSetMetaData metaData = rs.getMetaData();
+			
+			//Display all results from our query
+			while (rs.next())
+			{
+				String row = ""; 
+				for(int i = 1; i <= metaData.getColumnCount(); i++)
+				{
+					row += metaData.getColumnName(i) + ": ";
+					
+					row += rs.getString(i);
+					if (i < metaData.getColumnCount())
+						row += ", ";
+				}
+				System.out.println(row);
+			}
+		}
+		catch (SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
 	}
 	
 	//Placeholder get cash string
