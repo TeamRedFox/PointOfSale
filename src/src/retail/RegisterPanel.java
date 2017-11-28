@@ -221,6 +221,10 @@ public class RegisterPanel extends JPanel {
 	public JButton getLogOutBtn() {
 		return logOutBtn;
 	}
+	
+	public JButton getVoidTransactionBtn() {
+		return voidTransactionBtn;
+	}
 
 
 	public JTextField getSearchTxt() {

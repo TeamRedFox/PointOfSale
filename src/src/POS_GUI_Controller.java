@@ -116,6 +116,7 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getLogOutBtn().addActionListener(logOut);
 						registerPanel.getSearchBtn().addActionListener(addItem);
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
+						registerPanel.getVoidTransactionBtn().addActionListener(voidTransaction);
 
 						c.add("profile", registerPanel);
 						card.show(c, "profile");
@@ -190,5 +191,25 @@ public class POS_GUI_Controller extends JFrame {
 		}
 	};
 	
+	ActionListener voidTransaction = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Object[] options = { "Yes", "No" };
+		    int n = JOptionPane.showOptionDialog(new JFrame(),
+		            "Are you sure you want to void the transaction?", "LOG OUT?",
+		            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+		            options, options[1]);
+		    if(n == JOptionPane.OK_OPTION){ // Afirmative
+		        //.... 
+				card.show(c,"login");
+				setFrameTitle("POS");
+				card.removeLayoutComponent(registerPanel);
+				c.remove(registerPanel);
+	
+				loginPanel.getErrorLbl().setText("");
+				reformatScreen();
+				loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
+		    }
+		}
+	};
 	
 }
