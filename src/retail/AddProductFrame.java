@@ -29,9 +29,10 @@ public class AddProductFrame {
 	private int finalCost;
 	
 	private String error;
+	private JFrame Item;
 	
 	public AddProductFrame() {
-		JFrame Item = new JFrame("Add Item");
+		Item = new JFrame("Add Item");
 		Item.setResizable(false);
 		Item.setTitle("Add Item");
 		Item.setSize(400, 225);
@@ -150,6 +151,8 @@ public class AddProductFrame {
 		
 		try {
 			ItemDatabase.addItem(newItem);
+			JOptionPane.showMessageDialog(null, "Product Successfully Added");
+			Item.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

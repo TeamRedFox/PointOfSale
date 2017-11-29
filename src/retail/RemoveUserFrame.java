@@ -16,9 +16,10 @@ public class RemoveUserFrame extends JFrame {
 	private String username;
 	private String username2;
 	private String error;
+	private JFrame User;
 	
 	public RemoveUserFrame() {
-		JFrame User = new JFrame("Delete User");
+		User = new JFrame("Delete User");
 		User.setResizable(false);
 		User.setTitle("Delete User");
 		User.setSize(400, 225);
@@ -103,6 +104,8 @@ public class RemoveUserFrame extends JFrame {
 			        //.... 
 			    	try {
 						UserDatabase.removeUser(userID);
+						JOptionPane.showMessageDialog(null, "User Successfully Removed");
+						User.dispose();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

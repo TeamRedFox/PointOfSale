@@ -20,6 +20,7 @@ public class RemoveProductFrame {
 	
 	private String Barcode;
 	private String Barcode2;
+	private JFrame ItemR;
 
 	private String error;
 	
@@ -109,6 +110,8 @@ public class RemoveProductFrame {
 		        //.... 
 				try {
 					ItemDatabase.removeItem(barcode);
+					JOptionPane.showMessageDialog(null, "Item Successfully Deleted");
+					ItemR.dispose();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

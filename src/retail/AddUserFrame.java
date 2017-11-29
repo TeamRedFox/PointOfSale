@@ -19,10 +19,11 @@ public class AddUserFrame extends JFrame {
 	private String password2;
 	private boolean admin = false;
 	private String error;
+	private JFrame User;
 	ArrayList<String> push = new ArrayList<String>(4);
 	
 	public AddUserFrame() {
-		JFrame User = new JFrame("Add User");
+	    User = new JFrame("Add User");
 		User.setResizable(false);
 		User.setTitle("Add User");
 		User.setSize(400, 225);
@@ -133,6 +134,8 @@ public class AddUserFrame extends JFrame {
 		addNew.setPaswordHash(pass);
 		try {
 			UserDatabase.addUser(addNew);
+			JOptionPane.showMessageDialog(null, "User Successfully Added");
+			User.dispose();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
