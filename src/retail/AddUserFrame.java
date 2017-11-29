@@ -2,9 +2,13 @@ package retail;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import database_comm.UserDatabase;
+import login.User;
 
 public class AddUserFrame extends JFrame {
 	
@@ -92,7 +96,8 @@ public class AddUserFrame extends JFrame {
 		enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				error = "Invalid Entry: ";
-				push = null;
+				
+
 				if(ADMIN.isSelected()) {
 					admin = true;
 				}
@@ -120,65 +125,60 @@ public class AddUserFrame extends JFrame {
 
 	public void pushUser(String FN, String LN, String userID, String pass, boolean admin) {
 		// TODO Auto-generated method stub
-		System.out.println("Nope");
+		
+		User addNew = new User(userID);
+		addNew.setFirstName(FN);
+		addNew.setLastName(LN);
+		addNew.setAdmin(admin);
+		addNew.setPaswordHash(pass);
+		try {
+			UserDatabase.addUser(addNew);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void vData() {
 		
-		try {
-			validFN();
-			validLN();
-			validUser();
-			validPass();
-			pushUser(push.get(0).toString(), push.get(1).toString(), push.get(2).toString(), push.get(3).toString(), admin);
-			
-		} catch (Exception e) {
+		if (error.length() > 15) {
 			JOptionPane.showMessageDialog(null, error);
 		}
+		else {
+			pushUser(first, last, username, password, admin);
+		}
+		
+		
 	}
 	
-	public  Object validFN() {
-		if (first.length() >= 2) {
-			push.add(first);
-			return push;
-		} else {
+	public  void validFN() {
+		if (first.length() <= 2) {
 			error = error + "Invalid First Name | ";
-			return push;
 		}
 	}
 	
-	public Object validLN() {
-		if (last.length() >= 2) {
-			push.add(last);
-			return push;
-		} else {
+	public void validLN() {
+		if (last.length() <= 2) {
 			error = error + "Invalid Last Name | ";
-			return push;
 		}
 	}
 	
-	public Object validUser() {
-		if(username.length() >= 4) {
-			push.add(username);
-			return push;
-		} else {
+	public void validUser() {
+		if(username.length() <= 4) {
+			
 			error = error + "Invalid Username | ";
-			return push;
 		}
 	}
 	
-	public Object validPass() {
+	public void validPass() {
 		if(password.length() <= 3) {
 			if(password.equals(password2)) {
-				push.add(password);
-				return push;
+				
 			} else {
 				error = error + "Passwords do not match | ";
-				return push;
 			}
 		} else {
 			error = error + "Invalid Password | ";
-			return push;
 		}
 	}
 

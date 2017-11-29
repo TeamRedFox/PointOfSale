@@ -11,6 +11,7 @@ import javax.swing.*;
 import database_comm.UserDatabase;
 import login.InvalidUsernameOrPasswordException;
 import login.LoginPanel;
+import retail.AddProductFrame;
 import retail.AddUserFrame;
 import retail.Item;
 import retail.RegisterPanel;
@@ -117,6 +118,7 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getSearchBtn().addActionListener(addItem);
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
 						registerPanel.getVoidTransactionBtn().addActionListener(voidTransaction);
+						registerPanel.getAddProdBtn().addActionListener(addProduct);
 
 						c.add("profile", registerPanel);
 						card.show(c, "profile");
@@ -209,6 +211,12 @@ public class POS_GUI_Controller extends JFrame {
 				reformatScreen();
 				loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
 		    }
+		}
+	};
+	
+	ActionListener addProduct = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			AddProductFrame product = new AddProductFrame();
 		}
 	};
 	
