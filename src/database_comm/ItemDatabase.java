@@ -136,9 +136,42 @@ public class ItemDatabase
 
 		return true;
 	}
+
+
+	/**Removes the item matching the given barcode from the database, returns true if successful
+	 * @throws SQLException */
+	public static boolean removeItem(String barcode) throws SQLException
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+
+		//Set up query to remove an item from the ITEMS table and execute it
+		//TODO deal with placeholder ITEM_NO and COST values
+		String query = "DELETE FROM ITEMS WHERE BARCODE = " + DatabaseHelper.formatStringField(barcode);
+		
+		boolean successful = false;
+		//System.out.println(query);
+		try
+		{
+			//Attempt to execute query, storing the item in the database if successful
+			successful = connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
+		return successful;
+	}
 	
 	/**FOR DEBUG PURPOSES
-	 * Lists all users in the database
+	 * Lists all items in the database
 	 * @throws SQLException */
 	public static void printAllItems() throws SQLException
 	{

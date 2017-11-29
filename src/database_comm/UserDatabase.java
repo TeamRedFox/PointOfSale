@@ -130,6 +130,38 @@ public class UserDatabase
 
 		return true;
 	}
+
+
+	/**Removes the user matching the given barcode from the database, returns true if successful
+	 * @throws SQLException */
+	public static boolean removeUser(String username) throws SQLException
+	{
+		//Create database connection
+		DatabaseConnection connection = new DatabaseConnection();
+
+		//Set up query to remove a user from the USERS table and execute it
+		String query = "DELETE FROM USERS WHERE USERNAME = " + DatabaseHelper.formatStringField(username);
+		
+		boolean successful = false;
+		//System.out.println(query);
+		try
+		{
+			//Attempt to execute query, storing the user in the database if successful
+			successful = connection.execute(query);
+		}
+		catch(SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+
+		return successful;
+	}
 	
 	/**FOR DEBUG PURPOSES
 	 * Lists all users in the database
