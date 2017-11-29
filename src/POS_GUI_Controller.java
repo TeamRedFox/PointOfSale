@@ -15,6 +15,8 @@ import retail.AddProductFrame;
 import retail.AddUserFrame;
 import retail.Item;
 import retail.RegisterPanel;
+import retail.RemoveProductFrame;
+import retail.RemoveUserFrame;
 import login.User;
 
 
@@ -119,6 +121,9 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
 						registerPanel.getVoidTransactionBtn().addActionListener(voidTransaction);
 						registerPanel.getAddProdBtn().addActionListener(addProduct);
+						registerPanel.getDelProdBtn().addActionListener(delProduct);
+						registerPanel.getDelUserBtn().addActionListener(delUser);
+						
 
 						c.add("profile", registerPanel);
 						card.show(c, "profile");
@@ -220,4 +225,15 @@ public class POS_GUI_Controller extends JFrame {
 		}
 	};
 	
+	ActionListener delProduct = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			RemoveProductFrame remProd = new RemoveProductFrame();
+		}
+	};
+	
+	ActionListener delUser = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			RemoveUserFrame userR = new RemoveUserFrame();
+		}
+	};
 }

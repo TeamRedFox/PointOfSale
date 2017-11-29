@@ -29,7 +29,6 @@ public class AddProductFrame {
 	private int finalCost;
 	
 	private String error;
-	ArrayList<String> push = new ArrayList<String>(4);
 	
 	public AddProductFrame() {
 		JFrame Item = new JFrame("Add Item");

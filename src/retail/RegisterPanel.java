@@ -214,6 +214,10 @@ public class RegisterPanel extends JPanel {
 		return addUserBtn;
 	}
 	
+	public JButton getDelUserBtn() {
+		return delUserBtn;
+	}
+	
 	public JButton getSearchBtn() {
 		return searchBtn;
 	}
