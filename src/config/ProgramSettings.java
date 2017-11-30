@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-public class UserSettings
+public class ProgramSettings
 {
 	private final static String configFilePath = "config.properties";
 
