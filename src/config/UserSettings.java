@@ -10,21 +10,22 @@ import java.util.Properties;
 
 public class UserSettings
 {
-	private final String configFilePath = "config.properties";
+	private final static String configFilePath = "config.properties";
 
-	private Properties properties; 
+	private static Properties configProperties; 
 
-	public UserSettings()
+	/**Call this at the start of the program! Loads the config file for use*/
+	public static void initiate()
 	{
 		//Check if config File exists in the given location
 		File configFile = new File(configFilePath);
 		if (configFile.exists())	//If so, read from the file
-			properties = readFromProperties(configFilePath);
+			configProperties = readFromProperties(configFilePath);
 		else
 		{
 			//If not, create a new Properties instance and write it to a file at the filePath
-			properties = new Properties();
-			writeProperties(properties, configFilePath);
+			configProperties = new Properties();
+			writeProperties(configProperties, configFilePath);
 		}
 	}
 	
@@ -67,6 +68,7 @@ public class UserSettings
 	//Write the given properties instance to the config file
 	static void writeProperties(Properties properties, String filePath)
 	{
+		
 		//Initiate outputStream
 		OutputStream outputStream = null;
 
@@ -97,30 +99,47 @@ public class UserSettings
 		}
 	}
 	
+	
 	/**Adds or updates the property with the given key to be the given value, updates the config file*/
-	public void setProperty(String key, String value)
+	public static void setProperty(String key, String value)
 	{
-		properties.setProperty(key, value);
-		writeProperties(properties, configFilePath);
+		//Initiate settings if we haven't already 
+		if (configProperties == null)
+			initiate();
+		
+		configProperties.setProperty(key, value);
+		writeProperties(configProperties, configFilePath);
 	}
 
 	/**Returns the property with the given key from the config*/
-	public String getProperty(String key)
+	public static String getProperty(String key)
 	{
-		return properties.getProperty(key);
+		//Initiate settings if we haven't already 
+		if (configProperties == null)
+			initiate();
+		
+		return configProperties.getProperty(key);
 	}
 	
 	
 	/**Returns whether the config contains a propery with the given key*/
-	public boolean containsProperty(String key)
+	public static boolean containsProperty(String key)
 	{
-		return properties.containsKey(key);
+		//Initiate settings if we haven't already 
+		if (configProperties == null)
+			initiate();
+		
+		return configProperties.containsKey(key);
 	}
 	
 	/**Removes the property with the given key, updates the config file*/
-	public void removeProperty(String key)
+	public static void removeProperty(String key)
 	{
-		properties.remove(key);
-		writeProperties(properties, configFilePath);
+		//Initiate settings if we haven't already 
+		if (configProperties == null)
+			initiate();
+		
+		configProperties.remove(key);
+		writeProperties(configProperties, configFilePath);
 	}
 }
