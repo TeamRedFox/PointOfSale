@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import database_comm.ItemDatabase;
 import database_comm.UserDatabase;
 import login.InvalidUsernameOrPasswordException;
 import login.LoginPanel;
@@ -119,6 +120,7 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getLogOutBtn().addActionListener(logOut);
 						registerPanel.getSearchBtn().addActionListener(addItem);
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
+						registerPanel.getSearchBtn().addActionListener(searchItem);
 						registerPanel.getVoidTransactionBtn().addActionListener(voidTransaction);
 						registerPanel.getAddProdBtn().addActionListener(addProduct);
 						registerPanel.getDelProdBtn().addActionListener(delProduct);
@@ -234,6 +236,17 @@ public class POS_GUI_Controller extends JFrame {
 	ActionListener delUser = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			RemoveUserFrame userR = new RemoveUserFrame();
+		}
+	};
+	
+	ActionListener searchItem = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				ItemDatabase.printAllItems();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	};
 }

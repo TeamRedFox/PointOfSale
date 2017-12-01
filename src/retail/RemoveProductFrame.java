@@ -25,7 +25,7 @@ public class RemoveProductFrame {
 	private String error;
 	
 	public RemoveProductFrame() {
-		JFrame ItemR = new JFrame("Delete Product From Database");
+		ItemR = new JFrame("Delete Product From Database");
 		ItemR.setResizable(false);
 		ItemR.setTitle("Delete Product From Database");
 		ItemR.setSize(400, 225);
