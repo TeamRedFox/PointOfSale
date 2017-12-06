@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -40,6 +41,8 @@ public class RegisterPanel extends JPanel {
 	private JTextArea itemsTextArea = new JTextArea("Test");
 
 	private JPanel registerPnl = new JPanel();
+	
+	public Cart cart = new Cart();
 
 
 
@@ -179,18 +182,14 @@ public class RegisterPanel extends JPanel {
 		registerPnl.setLayout(new BorderLayout()); 
 		registerPnl.setBorder(new TitledBorder("Item Register"));
 		JLabel registerLbl = new JLabel("Item list:");
-		Cart cart = new Cart();
-		Item testItem = new Item("00000000");
-		testItem.setDescription("test");
-		cart.addItem(testItem);
+		//code for creating item cart list on GUI
+		JScrollPane itemListScrollPane = new JScrollPane();
 		JList cartList = new JList();
+		itemListScrollPane.setViewportView(cartList);
 		DefaultListModel newListModel = new DefaultListModel();
-		for (Item text : cart.list) {
-		   newListModel.addElement(text);
-		}
 		cartList.setModel(newListModel);
 		cartList.setVisible(true);
-		this.add(cartList, BorderLayout.SOUTH);
+		registerPnl.add(itemListScrollPane, BorderLayout.CENTER);
 		//TODO Use a JSpinner for item quantities when added to the item register
 		
 		registerPnl.add(registerLbl, BorderLayout.NORTH);
