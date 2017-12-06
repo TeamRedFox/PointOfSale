@@ -11,6 +11,13 @@ public class Item
 	{
 		this.setBarcode(barcode);
 	}
+	
+	public Item(Item newItem) {
+		this.setBarcode(newItem.getBarcode());
+		this.setDescription(newItem.getDescription());
+		this.setPrice(newItem.getPrice());
+		this.setTaxable(newItem.isTaxable());
+	}
 
 	public String getBarcode()
 	{
