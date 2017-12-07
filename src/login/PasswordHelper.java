@@ -6,6 +6,9 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordHelper
 {
+	private static String hashAlgorithm = "MD5";
+	private static String stringEncodingFormat = "UTF-8"; 
+	
 	public static String generatePasswordHash(String password)
 	{
 		//Create instances of digest and password char array
@@ -15,20 +18,18 @@ public class PasswordHelper
 		try
 		{
 			//Create instance of MessageDigest we can use to  
-			passDigest = MessageDigest.getInstance("MD5");
+			passDigest = MessageDigest.getInstance(hashAlgorithm);
 
 			//Convert password to byte array 
-			passArray = password.getBytes("UTF-8");
+			passArray = password.getBytes(stringEncodingFormat);
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			//Hardcoded algorithm type, this exception shouldn't be called
 			e.printStackTrace();
 			return "";
 		}
 		catch (UnsupportedEncodingException e)
 		{
-			//Hardcoded encoding type, this exception shouldn't be called
 			e.printStackTrace();
 			return "";
 		}
