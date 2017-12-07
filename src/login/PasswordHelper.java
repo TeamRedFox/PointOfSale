@@ -3,6 +3,7 @@ package login;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.xml.bind.DatatypeConverter;
 
 public class PasswordHelper
 {
@@ -34,9 +35,9 @@ public class PasswordHelper
 			return "";
 		}
 
-		//Use digest to get an array of chars as a hash and return it as a string
+		//Use digest to get hash as an array of chars and return it as a hex string
 		byte[] hashArray = passDigest.digest(passArray);
-		return new String(hashArray);
+		return DatatypeConverter.printHexBinary(hashArray);
 	}
 
 }
