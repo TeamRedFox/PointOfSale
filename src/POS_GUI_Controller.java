@@ -39,7 +39,7 @@ public class POS_GUI_Controller extends JFrame {
 	JPanel c = new JPanel();
 
 	//Constructor
-	public POS_GUI_Controller(POS_Driver website) {
+	public POS_GUI_Controller(POS_Driver register) {
 		super("POS");
 		this.register = register;
 
@@ -195,6 +195,7 @@ public class POS_GUI_Controller extends JFrame {
 	ActionListener addUser = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			AddUserFrame user = new AddUserFrame();
+			
 		}
 	};
 	
@@ -207,14 +208,8 @@ public class POS_GUI_Controller extends JFrame {
 		            options, options[1]);
 		    if(n == JOptionPane.OK_OPTION){ // Afirmative
 		        //.... 
-				card.show(c,"login");
-				setFrameTitle("POS");
-				card.removeLayoutComponent(registerPanel);
-				c.remove(registerPanel);
-	
-				loginPanel.getErrorLbl().setText("");
+				registerPanel.getRegisterPnl().removeAll();
 				reformatScreen();
-				loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
 		    }
 		}
 	};

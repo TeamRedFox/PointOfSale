@@ -29,6 +29,7 @@ public class RemoveProductFrame {
 		ItemR.setResizable(false);
 		ItemR.setTitle("Delete Product From Database");
 		ItemR.setSize(400, 225);
+		ItemR.setLocationRelativeTo(null);
 		
 		Panel greeting = new Panel();
 		JTextArea greet = new JTextArea("Please enter the following information");

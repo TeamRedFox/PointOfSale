@@ -1,5 +1,6 @@
 package retail;
 
+
 public class RetailHelper
 {
 	
@@ -11,4 +12,6 @@ public class RetailHelper
 		dollars /= 100;
 		return dollars + "." + cents;
 	}
+	
+	
 }

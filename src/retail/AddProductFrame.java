@@ -36,6 +36,7 @@ public class AddProductFrame {
 		Item.setResizable(false);
 		Item.setTitle("Add Item");
 		Item.setSize(400, 225);
+		Item.setLocationRelativeTo(null);
 		
 		Panel greeting = new Panel();
 		JTextArea greet = new JTextArea("Please enter the following information");

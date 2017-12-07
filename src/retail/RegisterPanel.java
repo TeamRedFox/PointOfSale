@@ -4,9 +4,6 @@ package retail;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -132,19 +129,20 @@ public class RegisterPanel extends JPanel {
 		infoPnl.setBorder(new TitledBorder("User Information"));
 		
 		JPanel userPnl = new JPanel();
-		userPnl.setLayout(new BoxLayout(userPnl, BoxLayout.PAGE_AXIS));
+		// FIXME temp fix revert if needed
+		userPnl.setLayout(new BoxLayout(userPnl, BoxLayout.Y_AXIS));
+		//userPnl.setLayout(new BorderLayout());
 		userPnl.setBorder(new TitledBorder("User"));
 		
 		JLabel lblFirstName = new JLabel("First Name:");
 		JLabel lblLastName = new JLabel("Last Name:");
-		JLabel lblEmail = new JLabel("Email:");
+		//JLabel lblEmail = new JLabel("Email:");
 		JLabel lblUsername = new JLabel("Username:");
 		JTextField txtFirstName = new JTextField(user.getFirstName(), 15);
 		txtFirstName.setEditable(false);
 		JTextField txtLastName = new JTextField(user.getLastName(), 15);
 		txtLastName.setEditable(false);
-//		JTextField txtEmail = new JTextField(user.getEmail(), 15);
-//		txtEmail.setEditable(false);
+
 		JTextField txtUsername = new JTextField(user.getUsername(), 15);
 		txtUsername.setEditable(false);
 		
@@ -156,10 +154,10 @@ public class RegisterPanel extends JPanel {
 		lastNamePnl.add(lblLastName);
 		lastNamePnl.add(txtLastName);
 		userPnl.add(lastNamePnl);
-		JPanel emailPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		emailPnl.add(lblEmail);
+	//	JPanel emailPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	//	emailPnl.add(lblEmail);
 	//	emailPnl.add(txtEmail);
-		userPnl.add(emailPnl);
+	//	userPnl.add(emailPnl);
 		JPanel usernamePnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		usernamePnl.add(lblUsername);
 		usernamePnl.add(txtUsername);
@@ -176,10 +174,10 @@ public class RegisterPanel extends JPanel {
 		// change register panel to boxlayout for single file drop?
 		registerPnl.setLayout(new BorderLayout()); 
 		registerPnl.setBorder(new TitledBorder("Item Register"));
-		JLabel registerLbl = new JLabel("Item list:");
+		//JLabel registerLbl = new JLabel("Item list:");
 		//TODO Use a JSpinner for item quantities when added to the item register
 		
-		registerPnl.add(registerLbl, BorderLayout.NORTH);
+		//registerPnl.add(registerLbl, BorderLayout.NORTH);
 //		registerPnl.add(itemsTextArea, BorderLayout.CENTER);
 		
 		infoPnl.add(userPnl);
@@ -187,9 +185,8 @@ public class RegisterPanel extends JPanel {
 		infoPnl.add(barcodePnl);
 		
 		
-		
+
 		this.add(infoPnl, BorderLayout.CENTER);
-		
 	}
 	
 	// getters and setters

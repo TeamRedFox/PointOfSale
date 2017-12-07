@@ -27,6 +27,7 @@ public class AddUserFrame extends JFrame {
 		User.setResizable(false);
 		User.setTitle("Add User");
 		User.setSize(400, 225);
+		User.setLocationRelativeTo(null);
 		
 		Panel greeting = new Panel();
 		JTextArea greet = new JTextArea("Please enter the following information");
