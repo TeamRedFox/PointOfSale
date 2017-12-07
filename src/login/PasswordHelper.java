@@ -10,6 +10,7 @@ public class PasswordHelper
 	private static String hashAlgorithm = "MD5";
 	private static String stringEncodingFormat = "UTF-8"; 
 	
+	/**Returns the hash for a given password string, in hex string format*/
 	public static String generatePasswordHash(String password)
 	{
 		//Create instances of digest and password char array
