@@ -8,13 +8,18 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import com.sun.glass.events.KeyEvent;
+
 import database_comm.ItemDatabase;
 import database_comm.UserDatabase;
 import login.InvalidUsernameOrPasswordException;
 import login.LoginPanel;
 import retail.AddProductFrame;
 import retail.AddUserFrame;
+import retail.Cart;
+import retail.CheckoutFrame;
 import retail.Item;
+import retail.ItemVoidFrame;
 import retail.RegisterPanel;
 import retail.RemoveProductFrame;
 import retail.RemoveUserFrame;
@@ -92,6 +97,8 @@ public class POS_GUI_Controller extends JFrame {
 
 		// makes it so pressing enter after inputting a password is used to login aside from pressing sign in button
 		loginPanel.getPasswordTxt().addActionListener(signIn); 
+		
+		
 	}
 
 	public void setFrameTitle(String title) {
@@ -125,6 +132,8 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getAddProdBtn().addActionListener(addProduct);
 						registerPanel.getDelProdBtn().addActionListener(delProduct);
 						registerPanel.getDelUserBtn().addActionListener(delUser);
+						registerPanel.getVoidItemBtn().addActionListener(itemVoid);
+						registerPanel.getCheckoutBtn().addActionListener(checkout);
 						
 
 						c.add("profile", registerPanel);
@@ -193,6 +202,7 @@ public class POS_GUI_Controller extends JFrame {
 		}
 	};// focuses on the password when logging out
 	
+	
 
 	ActionListener addUser = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -242,11 +252,28 @@ public class POS_GUI_Controller extends JFrame {
 	ActionListener searchItem = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				ItemDatabase.printAllItems();
+				Item item = ItemDatabase.getItemFromBarcode(RegisterPanel.searchTxt.getText());
+				Cart.addItem(item);
+				pack();
+				RegisterPanel.searchTxt.setText("");
+				revalidate();
+
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Product not Found");
 			}
+		}
+	};
+	
+	ActionListener itemVoid = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			ItemVoidFrame voidItem = new ItemVoidFrame();
+		}
+	};
+	
+	ActionListener checkout = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			CheckoutFrame check = new CheckoutFrame();
 		}
 	};
 }

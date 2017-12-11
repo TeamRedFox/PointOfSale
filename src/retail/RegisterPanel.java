@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -37,7 +38,9 @@ public class RegisterPanel extends JPanel {
 					clearBtn = new JButton("Clear");
 	// used to search item by barcode. usually has 12 digits
 	// FIXME make it so the user can only input 12 integers/digitsv 
-	private JTextField searchTxt = new JTextField(12); 		
+	private Cart cartPanel = new Cart();
+	
+	public static JTextField searchTxt = new JTextField(12); 		
 	private JTextArea itemsTextArea = new JTextArea("Test");
 
 	private JPanel registerPnl = new JPanel();
@@ -164,11 +167,12 @@ public class RegisterPanel extends JPanel {
 		JPanel emailPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		emailPnl.add(lblEmail);
 	//	emailPnl.add(txtEmail);
-		userPnl.add(emailPnl);
+		//userPnl.add(emailPnl);
 		JPanel usernamePnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		usernamePnl.add(lblUsername);
 		usernamePnl.add(txtUsername);
 		userPnl.add(usernamePnl);
+		//userPnl.add(Cart.pricing);
 		
 		/* TODO 
 		 * Add Item Register
@@ -183,16 +187,14 @@ public class RegisterPanel extends JPanel {
 		registerPnl.setBorder(new TitledBorder("Item Register"));
 		JLabel registerLbl = new JLabel("Item list:");
 		//code for creating item cart list on GUI
-		JScrollPane itemListScrollPane = new JScrollPane();
-		JList cartList = new JList();
-		itemListScrollPane.setViewportView(cartList);
-		DefaultListModel newListModel = new DefaultListModel();
-		cartList.setModel(newListModel);
-		cartList.setVisible(true);
-		registerPnl.add(itemListScrollPane, BorderLayout.CENTER);
+
+		registerPnl.add(registerLbl, BorderLayout.NORTH);
+		registerPnl.add(cartPanel, BorderLayout.CENTER);
+		//registerPnl.add(Cart.pricing, BorderLayout.SOUTH);
+		
 		//TODO Use a JSpinner for item quantities when added to the item register
 		
-		registerPnl.add(registerLbl, BorderLayout.NORTH);
+		
 //		registerPnl.add(itemsTextArea, BorderLayout.CENTER);
 		
 		infoPnl.add(userPnl);
@@ -217,6 +219,10 @@ public class RegisterPanel extends JPanel {
 	
 	public JButton getAddProdBtn() {
 		return addProductBtn;
+	}
+	
+	public JButton getCheckoutBtn() {
+		return checkOutBtn;
 	}
 	
 	public JButton getDelProdBtn() {
@@ -256,6 +262,12 @@ public class RegisterPanel extends JPanel {
 
 	public void setItemsTextArea(JTextArea itemsTextArea) {
 		this.itemsTextArea = itemsTextArea;
+	}
+
+
+	public JButton getVoidItemBtn() {
+		// TODO Auto-generated method stub
+		return voidItemBtn;
 	}
 	
 }
