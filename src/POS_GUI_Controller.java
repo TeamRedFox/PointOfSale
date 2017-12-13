@@ -204,7 +204,7 @@ public class POS_GUI_Controller extends JFrame {
 			//	itemList.get(barcodeID).getPrice());
 
 			reformatScreen();
-			loginPanel.getPasswordTxt().requestFocus();
+			registerPanel.getSearchTxt().requestFocus();
 		}
 	};// focuses on the password when logging out
 	
@@ -230,7 +230,7 @@ public class POS_GUI_Controller extends JFrame {
 	
 				loginPanel.getErrorLbl().setText("");
 				reformatScreen();
-				loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
+				registerPanel.getSearchTxt().requestFocus(); // focuses on the password when logging out
 		    }
 		}
 	};
@@ -260,6 +260,7 @@ public class POS_GUI_Controller extends JFrame {
 				cart.addItem(item);
 				pack();
 				RegisterPanel.searchTxt.setText("");
+				registerPanel.getSearchTxt().requestFocus();
 				//revalidate();
 
 			} catch (SQLException e1) {
