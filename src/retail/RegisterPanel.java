@@ -145,14 +145,14 @@ public class RegisterPanel extends JPanel {
 		
 		JLabel lblFirstName = new JLabel("First Name:");
 		JLabel lblLastName = new JLabel("Last Name:");
-		JLabel lblEmail = new JLabel("Email:");
+		//JLabel lblEmail = new JLabel("Email:");
 		JLabel lblUsername = new JLabel("Username:");
 		JTextField txtFirstName = new JTextField(user.getFirstName(), 15);
 		txtFirstName.setEditable(false);
 		JTextField txtLastName = new JTextField(user.getLastName(), 15);
 		txtLastName.setEditable(false);
-//		JTextField txtEmail = new JTextField(user.getEmail(), 15);
-//		txtEmail.setEditable(false);
+	//	JTextField txtEmail = new JTextField(user.getEmail(), 15);
+	//	txtEmail.setEditable(false);
 		JTextField txtUsername = new JTextField(user.getUsername(), 15);
 		txtUsername.setEditable(false);
 		
@@ -164,10 +164,10 @@ public class RegisterPanel extends JPanel {
 		lastNamePnl.add(lblLastName);
 		lastNamePnl.add(txtLastName);
 		userPnl.add(lastNamePnl);
-		JPanel emailPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		emailPnl.add(lblEmail);
+	//	JPanel emailPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	//	emailPnl.add(lblEmail);
 	//	emailPnl.add(txtEmail);
-		//userPnl.add(emailPnl);
+	//	userPnl.add(emailPnl);
 		JPanel usernamePnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		usernamePnl.add(lblUsername);
 		usernamePnl.add(txtUsername);
