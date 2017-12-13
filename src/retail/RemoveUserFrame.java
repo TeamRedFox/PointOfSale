@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import database_comm.ItemDatabase;
 import database_comm.UserDatabase;
 import login.User;
 
@@ -98,7 +97,7 @@ public class RemoveUserFrame extends JFrame {
 		else {
 			Object[] options = { "Yes", "No" };
 			 int n = JOptionPane.showOptionDialog(new JFrame(),
-			            "Are you sure you want to permenatly delete Item?", "Delete Item?",
+			            "Are you sure you want to permenatly delete User?", "Delete User?",
 			            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 			            options, options[1]);
 			    if(n == JOptionPane.OK_OPTION){ // Afirmative
@@ -118,21 +117,26 @@ public class RemoveUserFrame extends JFrame {
 		}
 
 	
-	public Boolean validUser() {
-		
-		if(username.length() >= 4) {
-			
-			if(username.equals(username2)) {
-				return true;
-			} else {
-				error = "Usernames do not match";
-				return false;
-			}
-			
-		} else {
-			error = "Username not Found";
+	public Boolean validUser()
+	{
+		if(!username.equals(username2)) {
+			error = "Usernames do not match";
 			return false;
 		}
+		
+		try {
+			String[] allUsernames = UserDatabase.getAllUsernames();
+			for(int i = 0; i < allUsernames.length; i++)
+			{
+				if (allUsernames[i].equals(username))
+					return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		error = "Username not Found";
+		return false;
 		
 	}
 	
