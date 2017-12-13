@@ -129,6 +129,7 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getSearchBtn().addActionListener(addItem);
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
 						registerPanel.getSearchBtn().addActionListener(searchItem);
+						registerPanel.getSearchTxt().addActionListener(searchItem);
 						registerPanel.getVoidTransactionBtn().addActionListener(voidTransaction);
 						registerPanel.getAddProdBtn().addActionListener(addProduct);
 						registerPanel.getDelProdBtn().addActionListener(delProduct);
