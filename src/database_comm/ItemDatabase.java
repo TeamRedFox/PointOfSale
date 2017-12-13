@@ -30,7 +30,7 @@ public class ItemDatabase
 				//If so, create item instance from result data
 				returnItem = new Item(barcode);
 				returnItem.setDescription(rs.getString("DESCR"));
-				returnItem.setPrice((int)(rs.getFloat("PRICE") * 100));
+				returnItem.setPrice((int)(rs.getDouble("PRICE") * (double)100));
 				returnItem.setTaxable(rs.getString("IS_TAXABLE").equals("Y"));
 				
 				System.out.println("Item retrieved successfully");
