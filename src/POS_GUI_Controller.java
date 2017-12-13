@@ -225,10 +225,6 @@ public class POS_GUI_Controller extends JFrame {
 		            options, options[1]);
 		    if(n == JOptionPane.OK_OPTION){ // Afirmative
 		        //.... 
-				card.show(c,"login");
-				setFrameTitle("POS");
-				card.removeLayoutComponent(registerPanel);
-				c.remove(registerPanel);
 				
 				cart.removeAllItems();
 	
