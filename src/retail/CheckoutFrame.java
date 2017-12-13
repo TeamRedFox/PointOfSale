@@ -59,6 +59,8 @@ public class CheckoutFrame extends JFrame {
 		enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					Item.setAlwaysOnTop(false);
+					
 					DecimalFormat money = new DecimalFormat("0.00");
 					int payment = (int)(Double.parseDouble(input.getText()) * 100);
 					change = cart.total - payment;
@@ -75,7 +77,9 @@ public class CheckoutFrame extends JFrame {
 						
 					} else {
 						JOptionPane.showMessageDialog(null, "Transaction Incomplete! $" + RetailHelper.getCashString(change) + " is due.");
+						Item.setAlwaysOnTop(true);
 					}
+					
 					
 				} catch (Exception a) {
 					
