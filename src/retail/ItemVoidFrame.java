@@ -11,8 +11,7 @@ import database_comm.ItemDatabase;
 public class ItemVoidFrame extends JFrame {
 	
 	private JFrame Item;
-	protected Cart cart = new Cart();
-	public ItemVoidFrame() {
+	public ItemVoidFrame(Cart cart) {
 		
 		Item = new JFrame("Void Item");
 		Item.setResizable(false);

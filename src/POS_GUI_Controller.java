@@ -41,14 +41,16 @@ public class POS_GUI_Controller extends JFrame {
 	//component variables
 	private RegisterPanel registerPanel;
 	private LoginPanel loginPanel;
-	protected Cart cart = new Cart();
+	protected Cart cart;
 
 	CardLayout card = new CardLayout();
 	JPanel c = new JPanel();
 
 	//Constructor
 	public POS_GUI_Controller(POS_Driver register) {
+				
 		super("POS");
+		cart = new Cart();
 		this.register = register;
 
 		loginPanel = new LoginPanel();
@@ -126,7 +128,7 @@ public class POS_GUI_Controller extends JFrame {
 					if(newUser != null) {
 						//selectionScreen();
 						setFrameTitle(username);
-						registerPanel = new RegisterPanel(newUser);
+						registerPanel = new RegisterPanel(newUser, cart);
 						registerPanel.getLogOutBtn().addActionListener(logOut);
 						registerPanel.getSearchBtn().addActionListener(addItem);
 						registerPanel.getAddUserdBtn().addActionListener(addUser);
@@ -271,13 +273,13 @@ public class POS_GUI_Controller extends JFrame {
 	
 	ActionListener itemVoid = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			ItemVoidFrame voidItem = new ItemVoidFrame();
+			ItemVoidFrame voidItem = new ItemVoidFrame(cart);
 		}
 	};
 	
 	ActionListener checkout = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			CheckoutFrame check = new CheckoutFrame();
+			CheckoutFrame check = new CheckoutFrame(cart);
 		}
 	};
 }

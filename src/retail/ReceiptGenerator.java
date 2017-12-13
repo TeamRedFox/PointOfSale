@@ -14,10 +14,9 @@ import java.awt.*;
 public class ReceiptGenerator{
 
 	//private ShoppingCartPanel cart = new ShoppingCartPanel(null);
-	private Cart info = new Cart();
 	protected static String cart = "";
 	
-	public ReceiptGenerator() {
+	public ReceiptGenerator(Cart info) {
 		
 		try{
 				DecimalFormat money = new DecimalFormat("0.00");

@@ -12,9 +12,8 @@ public class CheckoutFrame extends JFrame {
 	protected JPanel North, information;
 	protected static double change;
 	
-	Cart cart = new Cart();
 	
-	public CheckoutFrame() {
+	public CheckoutFrame(Cart cart) {
 		
 		Item = new JFrame("Checkout");
 		Item.setResizable(false);
@@ -65,13 +64,13 @@ public class CheckoutFrame extends JFrame {
 					change = (double) cart.total - payment;
 					if (change == 0) {
 						JOptionPane.showMessageDialog(null, "Transaction Complete!");
-						ReceiptGenerator receipt = new ReceiptGenerator();
+						ReceiptGenerator receipt = new ReceiptGenerator(cart);
 						Item.dispose();
 						
 					} else if (change < 0){
 						change = Math.abs(change);
 						JOptionPane.showMessageDialog(null, "Transaction Complete! Change Due: $" + money.format(change));
-						ReceiptGenerator receipt = new ReceiptGenerator();
+						ReceiptGenerator receipt = new ReceiptGenerator(cart);
 						Item.dispose();
 						
 					} else {

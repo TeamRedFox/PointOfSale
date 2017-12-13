@@ -23,6 +23,7 @@ import login.User;
 
 public class RegisterPanel extends JPanel {
 //panel that shows personal info and later the saved results from the previous login session
+	private Cart cartPanel;
 
 	// admin buttons (implement role specific buttons)
 	private JButton addUserBtn = new JButton("Add User"),
@@ -36,22 +37,20 @@ public class RegisterPanel extends JPanel {
 					searchBtn = new JButton("Search Item"),
 					logOutBtn = new JButton("Log Out"),
 					clearBtn = new JButton("Clear");
-	// used to search item by barcode. usually has 12 digits
-	// FIXME make it so the user can only input 12 integers/digitsv 
-	private Cart cartPanel = new Cart();
+	
 	
 	public static JTextField searchTxt = new JTextField(12); 		
 	private JTextArea itemsTextArea = new JTextArea("Test");
 
 	private JPanel registerPnl = new JPanel();
 	
-	public Cart cart = new Cart();
 
 
 
 	public String searchString = "";
 	
-	public RegisterPanel(User user) {
+	public RegisterPanel(User user, Cart cart) {
+		cartPanel = cart;
 		this.setLayout(new BorderLayout());
 		displayInfo(user);
 	}

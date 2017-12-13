@@ -38,12 +38,12 @@ public class Cart extends JPanel {
 		scroll.setSize(300, 150);
 		//add(shoppingList);
 		
+
+		sub = new JTextArea();
+		tot = new JTextArea();
+		fTot = new JTextArea();
 		
-		sub = new JTextArea("Sub-Total: $" + RetailHelper.getCashString(subtotal));
-		
-		tot = new JTextArea("Tax: $" + RetailHelper.getCashString(totalTax));
-		
-		fTot = new JTextArea("Total: $" + RetailHelper.getCashString(total));
+		updatePriceFields();
 	
 		sub.setBackground(null);
 		tot.setBackground(null);
@@ -68,16 +68,21 @@ public class Cart extends JPanel {
 	}
 	
 	//constructor to create an arraylist for cart with a specified size
-	public Cart(int cartSize) {
-		
-		list = new ArrayList<Item> (cartSize);
-		this.setCartSize(0);
-		this.setSubtotal(0);
-		this.setTotalTax(0);
-		this.setTotal(0);
-		
-		
-		
+//	public Cart(int cartSize) {
+//		
+//		list = new ArrayList<Item> (cartSize);
+//		this.setCartSize(0);
+//		this.setSubtotal(0);
+//		this.setTotalTax(0);
+//		this.setTotal(0);
+//	}
+	
+	void updatePriceFields()
+	{
+		System.out.println("UPDATING " + this.hashCode());
+		sub.setText("Sub-Total: $" + RetailHelper.getCashString(subtotal));
+		tot.setText("Tax: $" + RetailHelper.getCashString(totalTax));
+		fTot.setText("Total: $" + RetailHelper.getCashString(total));
 	}
 	
 	//add an item to cart
@@ -106,7 +111,8 @@ public class Cart extends JPanel {
 			}
 			
 			total += newItem.getPrice();
-			System.out.println(total);
+			
+			updatePriceFields();
 			
 		}catch(NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Product not Found");	
@@ -143,6 +149,8 @@ public class Cart extends JPanel {
 			}
 			
 			total -= newItem.getPrice();
+
+			updatePriceFields();
 			
 		} catch (Exception a) {
 			
