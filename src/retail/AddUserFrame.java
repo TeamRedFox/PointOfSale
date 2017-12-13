@@ -168,34 +168,33 @@ public class AddUserFrame extends JFrame {
 	}
 	
 	void validFN() {
-		if (first.length() <= 2) {
+		if (first.length() < 2) {
 			error = error + "Invalid First Name | ";
 		}
 	}
 	
 	void validLN() {
-		if (last.length() <= 2) {
+		if (last.length() < 2) {
 			error = error + "Invalid Last Name | ";
 		}
 	}
 	
 	void validUser() {
-		if(username.length() <= 4) {
+		if(username.length() <= 2) {
 			
 			error = error + "Invalid Username | ";
 		}
 	}
 	
 	void validPass() {
-		System.out.println("hi?");
-		if(password.length() <= 3) {
+		if(password.length() < 4) {
+			error = error + "Invalid Password | ";
+		} else {
 			if(password.equals(password2)) {
 				
 			} else {
 				error = error + "Passwords do not match | ";
 			}
-		} else {
-			error = error + "Invalid Password | ";
 		}
 	}
 
