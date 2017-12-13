@@ -40,7 +40,7 @@ public class ReceiptGenerator{
 				writer.println("Sub-Total: $" + money.format(((double) info.subtotal)/100));
 				writer.println("Tax: $" + money.format(((double) info.totalTax)/100));
 				writer.println("Total: $" + money.format(((double) info.total)/100));
-				writer.println("Change Due: $" + money.format(CheckoutFrame.change)); 
+				writer.println("Change Due: $" + RetailHelper.getCashString(CheckoutFrame.change)); 
 				writer.println(" "); 
 				writer.println("Thank You, Come again soon!");
 				writer.close();

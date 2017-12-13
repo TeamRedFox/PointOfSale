@@ -10,7 +10,7 @@ public class CheckoutFrame extends JFrame {
 
 	private JFrame Item;
 	protected JPanel North, information;
-	protected static double change;
+	protected static int change;
 	
 	
 	public CheckoutFrame(Cart cart) {
@@ -60,8 +60,8 @@ public class CheckoutFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					DecimalFormat money = new DecimalFormat("0.00");
-					double payment = Double.parseDouble(input.getText());
-					change = (double) cart.total - payment;
+					int payment = (int)(Double.parseDouble(input.getText()) * 100);
+					change = cart.total - payment;
 					if (change == 0) {
 						JOptionPane.showMessageDialog(null, "Transaction Complete!");
 						ReceiptGenerator receipt = new ReceiptGenerator(cart);
@@ -69,12 +69,12 @@ public class CheckoutFrame extends JFrame {
 						
 					} else if (change < 0){
 						change = Math.abs(change);
-						JOptionPane.showMessageDialog(null, "Transaction Complete! Change Due: $" + money.format(change));
+						JOptionPane.showMessageDialog(null, "Transaction Complete! Change Due: $" + RetailHelper.getCashString(change));
 						ReceiptGenerator receipt = new ReceiptGenerator(cart);
 						Item.dispose();
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "Transaction Incomplete! $" + change + " is due.");
+						JOptionPane.showMessageDialog(null, "Transaction Incomplete! $" + RetailHelper.getCashString(change) + " is due.");
 					}
 					
 				} catch (Exception a) {
