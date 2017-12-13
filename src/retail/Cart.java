@@ -29,11 +29,8 @@ public class Cart extends JPanel {
 	public Cart() {
 		DecimalFormat money = new DecimalFormat("0.00");
 		
-		list = new ArrayList<Item> (100);
-		this.setCartSize(0);
-		this.setSubtotal(0);
-		this.setTotalTax(0);
-		this.setTotal(0);
+		resetCartFields();
+		
 		scroll.setViewportView(shoppingList);
 		scroll.setSize(300, 150);
 		//add(shoppingList);
@@ -76,6 +73,17 @@ public class Cart extends JPanel {
 //		this.setTotalTax(0);
 //		this.setTotal(0);
 //	}
+	
+	void resetCartFields()
+	{
+		list = new ArrayList<Item> (100);
+		listModel.removeAllElements();
+		
+		this.setCartSize(0);
+		this.setSubtotal(0);
+		this.setTotalTax(0);
+		this.setTotal(0);
+	}
 	
 	void updatePriceFields()
 	{
@@ -154,10 +162,17 @@ public class Cart extends JPanel {
 			
 		} catch (Exception a) {
 			
-			JOptionPane.showMessageDialog(null, "Product not Found");	
+			JOptionPane.showMessageDialog(null, "Product not Found");
 		}
 		
 		
+	}
+	
+	//Remove all items in the cart to clear transaction
+	public void removeAllItems()
+	{
+		resetCartFields();
+		updatePriceFields();
 	}
 	
 	public int getCartSize() {
