@@ -14,6 +14,7 @@ import database_comm.ItemDatabase;
 import database_comm.UserDatabase;
 import login.InvalidUsernameOrPasswordException;
 import login.LoginPanel;
+import login.SecurityHelper;
 import retail.AddProductFrame;
 import retail.AddUserFrame;
 import retail.Cart;
@@ -117,6 +118,7 @@ public class POS_GUI_Controller extends JFrame {
 			try {
 				String username = loginPanel.getUsernameTxt().getText();
 				String password = new String(loginPanel.getPasswordTxt().getPassword());
+				password = SecurityHelper.generatePasswordHash(password);
 				User newUser;
 				try {
 					newUser = UserDatabase.getUserFromLogin(username, password);

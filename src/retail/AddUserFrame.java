@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import database_comm.UserDatabase;
+import login.SecurityHelper;
 import login.User;
 
 public class AddUserFrame extends JFrame {
@@ -133,7 +134,7 @@ public class AddUserFrame extends JFrame {
 		addNew.setFirstName(FN);
 		addNew.setLastName(LN);
 		addNew.setAdmin(admin);
-		addNew.setPaswordHash(pass);
+		addNew.setPaswordHash(SecurityHelper.generatePasswordHash(pass));
 		try {
 			UserDatabase.addUser(addNew);
 			JOptionPane.showMessageDialog(null, "User Successfully Added");
