@@ -91,6 +91,7 @@ public class RemoveUserFrame extends JFrame {
 	public void deleteUser(String userID) {
 		// TODO Auto-generated method stub
 		
+		User.setAlwaysOnTop(false);
 		if (validUser() == false) {
 			JOptionPane.showMessageDialog(null, error);
 		}
@@ -113,6 +114,7 @@ public class RemoveUserFrame extends JFrame {
 			    }
 			
 		}
+		User.setAlwaysOnTop(true);
 		}
 
 	
