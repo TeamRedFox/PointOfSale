@@ -1,8 +1,9 @@
 package retail;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -33,6 +34,11 @@ public class Cart extends JPanel {
 		
 		scroll.setViewportView(shoppingList);
 		scroll.setSize(300, 150);
+		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+	        }
+	    }); 
 		//add(shoppingList);
 		
 
