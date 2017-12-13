@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.xml.bind.DatatypeConverter;
 
-public class PasswordHelper
+public class SecurityHelper
 {
 	private static String hashAlgorithm = "MD5";
 	private static String stringEncodingFormat = "UTF-8"; 
