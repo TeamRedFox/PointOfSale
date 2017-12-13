@@ -56,6 +56,34 @@ public class UserDatabase
 		//Return our results
 		return returnUser;
 	}
+
+	/**Returns true if a user with the given username exists*/
+	public static boolean doesUserExist(String username) throws SQLException
+	{
+
+		//Create query to find user with matching username
+		DatabaseConnection connection = new DatabaseConnection();
+		String query = "SELECT * FROM USERS WHERE USERNAME = '" + username + "'";
+		try
+		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			
+			//Return if our query got any results
+			return rs.next();
+		}
+		catch (SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+		
+	}
 	
 	/**Adds the given user to the database, returns true if successful
 	 * @throws SQLException */
