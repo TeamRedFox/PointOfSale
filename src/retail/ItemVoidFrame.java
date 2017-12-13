@@ -11,7 +11,7 @@ import database_comm.ItemDatabase;
 public class ItemVoidFrame extends JFrame {
 	
 	private JFrame Item;
-	
+	protected Cart cart = new Cart();
 	public ItemVoidFrame() {
 		
 		Item = new JFrame("Void Item");
@@ -57,7 +57,7 @@ public class ItemVoidFrame extends JFrame {
 				try {
 					String user = input.getText();
 					Item product = ItemDatabase.getItemFromBarcode(user);
-					Cart.removeItem(product);
+					cart.removeItem(product);
 					Item.dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -77,7 +77,7 @@ public class ItemVoidFrame extends JFrame {
 		
 		Item.add(combo);
 		Item.setVisible(true);
-			
+		Item.setAlwaysOnTop(true);
 	}
 
 }

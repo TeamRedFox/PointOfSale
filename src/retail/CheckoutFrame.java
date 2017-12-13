@@ -62,7 +62,7 @@ public class CheckoutFrame extends JFrame {
 				try {
 					DecimalFormat money = new DecimalFormat("0.00");
 					double payment = Double.parseDouble(input.getText());
-					change = (double) Cart.total - payment;
+					change = (double) cart.total - payment;
 					if (change == 0) {
 						JOptionPane.showMessageDialog(null, "Transaction Complete!");
 						ReceiptGenerator receipt = new ReceiptGenerator();

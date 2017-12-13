@@ -46,7 +46,7 @@ public class POS_GUI_Controller extends JFrame {
 	JPanel c = new JPanel();
 
 	//Constructor
-	public POS_GUI_Controller(POS_Driver website) {
+	public POS_GUI_Controller(POS_Driver register) {
 		super("POS");
 		this.register = register;
 
