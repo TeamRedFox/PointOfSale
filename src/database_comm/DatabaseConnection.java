@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.sun.scenario.Settings;
+
+import config.ProgramSettings;
+
 public class DatabaseConnection
 {
 
@@ -18,7 +22,7 @@ public class DatabaseConnection
 	//static final String connectionUrl = "jdbc:sqlserver://150.250.147.167:1433;DatabaseName=REDFOX;user=sa;password=brianbrian;";
 
 	//Debug online string
-	String connectionUrl = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=brian;password=brianbrian;";
+	//String connectionUrl = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=brian;password=brianbrian;";
 
 	private Connection connection;
 	private Statement statement;
@@ -37,9 +41,20 @@ public class DatabaseConnection
 		}
 
 		System.out.println("Connecting to database...");
-		connection = DriverManager.getConnection(connectionUrl);
+		connection = DriverManager.getConnection(getConnectionUrl());
 		statement = connection.createStatement();
 
+	}
+	
+	private String getConnectionUrl()
+	{
+		return "jdbc:sqlserver://"
+				+ ProgramSettings.getProperty("database_server_name") + ":"
+				+ ProgramSettings.getProperty("database_port") + ";DatabaseName="
+				+ ProgramSettings.getProperty("database_name") + ";user="
+				+ ProgramSettings.getProperty("database_username") + ";password="
+				+ ProgramSettings.getProperty("database_password") + ";";
+		//String s = "jdbc:sqlserver://rbmsdemo.dyndns.org:1433;DatabaseName=REDFOX;user=brian;password=brianbrian;";		
 	}
 
 	//Executes and returns results from a given query
