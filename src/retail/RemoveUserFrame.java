@@ -125,18 +125,16 @@ public class RemoveUserFrame extends JFrame {
 		}
 		
 		try {
-			String[] allUsernames = UserDatabase.getAllUsernames();
-			for(int i = 0; i < allUsernames.length; i++)
+			if (!UserDatabase.doesUserExist(username))
 			{
-				if (allUsernames[i].equals(username))
-					return true;
+				error = "Username not Found";
+				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		error = "Username not Found";
-		return false;
+		
+		return true;
 		
 	}
 	
