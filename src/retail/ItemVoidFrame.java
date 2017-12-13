@@ -11,7 +11,6 @@ import database_comm.ItemDatabase;
 public class ItemVoidFrame extends JFrame {
 	
 	private JFrame Item;
-	protected Cart cart = new Cart();
 	
 	public ItemVoidFrame() {
 		
@@ -19,6 +18,7 @@ public class ItemVoidFrame extends JFrame {
 		Item.setResizable(false);
 		Item.setTitle("Void Item");
 		Item.setSize(400, 100);
+		Item.setLocationRelativeTo(null);
 		
 		Panel greeting = new Panel();
 		JTextArea greet = new JTextArea("Please enter the following information");
@@ -57,7 +57,7 @@ public class ItemVoidFrame extends JFrame {
 				try {
 					String user = input.getText();
 					Item product = ItemDatabase.getItemFromBarcode(user);
-					cart.removeItem(product);
+					Cart.removeItem(product);
 					Item.dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -77,7 +77,7 @@ public class ItemVoidFrame extends JFrame {
 		
 		Item.add(combo);
 		Item.setVisible(true);
-		
+			
 	}
 
 }
