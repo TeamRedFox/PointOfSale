@@ -11,4 +11,11 @@ public class RetailHelper
 		dollars /= 100;
 		return dollars + "." + ((cents < 10 ) ? "0" : "") + cents;
 	}
+
+	/**Returns price in cents from given cash string formatted X.XX*/
+	public static int getCentsFromCashString(String cashString)
+	{
+		String[] parts = cashString.split(".");
+		return (Integer.parseInt(parts[0]) * 100) + Integer.parseInt(parts[1]);
+	}
 }
