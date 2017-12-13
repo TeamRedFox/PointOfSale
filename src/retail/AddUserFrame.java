@@ -98,7 +98,7 @@ public class AddUserFrame extends JFrame {
 		buttons.add(enter);
 		enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				error = "Invalid Entry: ";
+				error = "";
 				
 
 				if(ADMIN.isSelected()) {
@@ -137,7 +137,6 @@ public class AddUserFrame extends JFrame {
 		addNew.setPaswordHash(SecurityHelper.generatePasswordHash(pass));
 		try {
 			UserDatabase.addUser(addNew);
-			User.setAlwaysOnTop(false);
 			JOptionPane.showMessageDialog(null, "User Successfully Added");
 			User.dispose();
 		} catch (SQLException e) {
@@ -146,38 +145,49 @@ public class AddUserFrame extends JFrame {
 		}
 	}
 	
-	public void vData() {
+	void vData() {
 		
-		if (error.length() > 15) {
-			JOptionPane.showMessageDialog(null, error);
-		}
-		else {
+		User.setAlwaysOnTop(false);
+
+		validFN();
+		validLN();
+		validUser();
+		validPass();
+
+		if (error.isEmpty()) {
 			pushUser(first, last, username, password, admin);
 		}
-		
+		else {
+			error = error.substring(0, error.length() - 3);
+			JOptionPane.showMessageDialog(null, "Invalid Entry: " + error);
+		}
+
+		error = "";
+		User.setAlwaysOnTop(true);
 		
 	}
 	
-	public  void validFN() {
+	void validFN() {
 		if (first.length() <= 2) {
 			error = error + "Invalid First Name | ";
 		}
 	}
 	
-	public void validLN() {
+	void validLN() {
 		if (last.length() <= 2) {
 			error = error + "Invalid Last Name | ";
 		}
 	}
 	
-	public void validUser() {
+	void validUser() {
 		if(username.length() <= 4) {
 			
 			error = error + "Invalid Username | ";
 		}
 	}
 	
-	public void validPass() {
+	void validPass() {
+		System.out.println("hi?");
 		if(password.length() <= 3) {
 			if(password.equals(password2)) {
 				
