@@ -97,7 +97,7 @@ public class RemoveUserFrame extends JFrame {
 		else {
 			Object[] options = { "Yes", "No" };
 			 int n = JOptionPane.showOptionDialog(new JFrame(),
-			            "Are you sure you want to permenatly delete User?", "Delete User?",
+			            "Are you sure you want to permenantly delete User?", "Delete User?",
 			            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 			            options, options[1]);
 			    if(n == JOptionPane.OK_OPTION){ // Afirmative
