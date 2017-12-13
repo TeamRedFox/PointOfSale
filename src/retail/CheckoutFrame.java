@@ -25,9 +25,9 @@ public class CheckoutFrame extends JFrame {
 		North = new JPanel();
 		North.add(cart.scroll, BorderLayout.NORTH);
 		
-		JTextArea totals = new JTextArea("Sub-Total: $" + money.format((double) cart.subtotal/100) + "\n" + 
-											 "Tax: $" + money.format((double) cart.totalTax/100) + "\n" +
-											"Total: $" + money.format((double) cart.total/100));
+		JTextArea totals = new JTextArea("Sub-Total: $" + money.format(((double) cart.subtotal)/100) + "\n" + 
+											 "Tax: $" + money.format(((double) cart.totalTax)/100) + "\n" +
+											"Total: $" + money.format(((double) cart.total)/100));
 		
 		totals.setBackground(null);
 		North.add(totals, BorderLayout.CENTER);
@@ -82,6 +82,7 @@ public class CheckoutFrame extends JFrame {
 			}
 		});
 		//cart.add(North);
+		
 		Item.add(North, BorderLayout.NORTH);
 		Item.add(information, BorderLayout.CENTER);
 		Item.add(buttons, BorderLayout.SOUTH);

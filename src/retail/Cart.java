@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,7 +23,7 @@ public class Cart extends JPanel {
 	protected JScrollPane scroll = new JScrollPane();
 	protected JTextArea sub, tot, fTot;
 	protected static JPanel subP, totP,fTotP, pricing = new JPanel();
-	
+	protected static String Cart = "";
 	
 	//constructor to create an arraylist for cart with a default size of 100
 	public Cart() {
@@ -80,26 +81,33 @@ public class Cart extends JPanel {
 	//add an item to cart
 	public static void addItem(Item newItem){
 		DecimalFormat money = new DecimalFormat("0.00");
-		list.add(newItem);
-		String barcode = newItem.getBarcode();
-		String description = newItem.getDescription();
-		Double price = ((double) newItem.getPrice()) / 100;
-		
-		String fprice = money.format(price);
-		
-		listModel.addElement(barcode + " " + description + " $" + fprice);
-		
-		size++;
-		subtotal += newItem.getPrice();
-		
-		if (newItem.isTaxable()) {
+		try {
+			list.add(newItem);
+			String barcode = newItem.getBarcode();
+			String description = newItem.getDescription();
+			Double price = ((double) newItem.getPrice()) / 100;
 			
-			total += (newItem.getPrice() * 7);
-			totalTax += (newItem.getPrice() * 7);
+			String fprice = money.format(price);
 			
+			listModel.addElement(barcode + " " + description + " $" + fprice);
+			Cart = Cart + "\n" + 
+			
+			size++;
+			subtotal += newItem.getPrice();
+			
+			if (newItem.isTaxable()) {
+				
+				total += (newItem.getPrice() * .07);
+				totalTax += (newItem.getPrice() * .07);
+				
+			}
+			
+			total += newItem.getPrice();
+			
+		}catch(NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Product not Found");	
 		}
 		
-		total += newItem.getPrice();
 		
 	}
 	
@@ -107,27 +115,37 @@ public class Cart extends JPanel {
 	public static void removeItem(Item newItem){
 		
 		DecimalFormat money = new DecimalFormat("0.00");
-		list.add(newItem);
-		String barcode = newItem.getBarcode();
-		String description = newItem.getDescription();
-		Double price = ((double) newItem.getPrice()) / 100;
-		
-		String fprice = money.format(price);
-		
-		listModel.removeElement(barcode + " " + description + " $" + fprice);
-		
-		size++;
-		subtotal -= newItem.getPrice();
 		
 		
-		if (newItem.isTaxable()) {
+		try {
 			
-			total -= (newItem.getPrice() * 7);
-			totalTax -= (newItem.getPrice() * 7);
+			list.remove(newItem);
+			String barcode = newItem.getBarcode();
+			String description = newItem.getDescription();
+			Double price = ((double) newItem.getPrice()) / 100;
 			
+			String fprice = money.format(price);
+				
+				listModel.removeElement(barcode + " " + description + " $" + fprice);
+			
+			size++;
+			subtotal -= newItem.getPrice();
+			
+			
+			if (newItem.isTaxable()) {
+				
+				total -= (newItem.getPrice() * .07);
+				totalTax -= (newItem.getPrice() * .07);
+				
+			}
+			
+			total -= newItem.getPrice();
+			
+		} catch (Exception a) {
+			
+			JOptionPane.showMessageDialog(null, "Product not Found");	
 		}
 		
-		total -= newItem.getPrice();
 		
 	}
 	

@@ -15,6 +15,7 @@ public class ReceiptGenerator{
 
 	//private ShoppingCartPanel cart = new ShoppingCartPanel(null);
 	private Cart info = new Cart();
+	protected static String cart = "";
 	
 	public ReceiptGenerator() {
 		
@@ -29,13 +30,18 @@ public class ReceiptGenerator{
 					
 				} 
 				*/
+				for(int i = 0; i  < Cart.listModel.size(); i++) {
+					cart = cart + "\n" + Cart.listModel.getElementAt(i).toString();
+					System.out.println(cart);	
+					}
+				
 				writer.println("Items");
-				writer.println(info.shoppingList);
+				writer.println(cart);
 				writer.println(" "); 
-				writer.println("Sub-Total: $" + money.format((double) info.subtotal/100));
-				writer.println("Tax: $" + money.format((double) info.totalTax/100));
-				writer.println("Total: $" + money.format((double) info.total/100));
-				writer.println("Change Due: $" + CheckoutFrame.change); 
+				writer.println("Sub-Total: $" + money.format(((double) info.subtotal)/100));
+				writer.println("Tax: $" + money.format(((double) info.totalTax)/100));
+				writer.println("Total: $" + money.format(((double) info.total)/100));
+				writer.println("Change Due: $" + money.format(CheckoutFrame.change)); 
 				writer.println(" "); 
 				writer.println("Thank You, Come again soon!");
 				writer.close();
