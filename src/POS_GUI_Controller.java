@@ -40,6 +40,7 @@ public class POS_GUI_Controller extends JFrame {
 	//component variables
 	private RegisterPanel registerPanel;
 	private LoginPanel loginPanel;
+	protected Cart cart = new Cart();
 
 	CardLayout card = new CardLayout();
 	JPanel c = new JPanel();
@@ -253,10 +254,10 @@ public class POS_GUI_Controller extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Item item = ItemDatabase.getItemFromBarcode(RegisterPanel.searchTxt.getText());
-				Cart.addItem(item);
+				cart.addItem(item);
 				pack();
 				RegisterPanel.searchTxt.setText("");
-				revalidate();
+				//revalidate();
 
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

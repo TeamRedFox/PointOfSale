@@ -14,9 +14,9 @@ import javax.swing.JTextArea;
 public class Cart extends JPanel {
 	
 	public static ArrayList<Item> list;
-	protected static int size, subtotal = 0;
-	protected static int total = 0;
-	protected static int totalTax = 0;
+	protected  int size, subtotal = 0;
+	protected  int total = 0;
+	protected  int totalTax = 0;
 	
 	protected static DefaultListModel listModel = new DefaultListModel();
 	protected JList shoppingList = new JList(listModel);
@@ -39,10 +39,12 @@ public class Cart extends JPanel {
 		//add(shoppingList);
 		
 		
-		sub = new JTextArea("Sub-Total: $" + money.format((double) subtotal/100));
-		tot = new JTextArea("Tax: $" + money.format((double) totalTax/100));
-		fTot = new JTextArea("Total: $" + money.format((double) total/100));
+		sub = new JTextArea("Sub-Total: $" + RetailHelper.getCashString(subtotal));
 		
+		tot = new JTextArea("Tax: $" + RetailHelper.getCashString(totalTax));
+		
+		fTot = new JTextArea("Total: $" + RetailHelper.getCashString(total));
+	
 		sub.setBackground(null);
 		tot.setBackground(null);
 		fTot.setBackground(null);
@@ -79,7 +81,7 @@ public class Cart extends JPanel {
 	}
 	
 	//add an item to cart
-	public static void addItem(Item newItem){
+	public void addItem(Item newItem){
 		DecimalFormat money = new DecimalFormat("0.00");
 		try {
 			list.add(newItem);
@@ -95,14 +97,16 @@ public class Cart extends JPanel {
 			size++;
 			subtotal += newItem.getPrice();
 			
+			
 			if (newItem.isTaxable()) {
 				
-				total += (newItem.getPrice() * .07);
+				this.setTotal( (int) (this.getTotal() + (newItem.getPrice() * .07)));
 				totalTax += (newItem.getPrice() * .07);
 				
 			}
 			
 			total += newItem.getPrice();
+			System.out.println(total);
 			
 		}catch(NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Product not Found");	
@@ -112,7 +116,7 @@ public class Cart extends JPanel {
 	}
 	
 	//remove item at specified index
-	public static void removeItem(Item newItem){
+	public  void removeItem(Item newItem){
 		
 		DecimalFormat money = new DecimalFormat("0.00");
 		
@@ -128,7 +132,6 @@ public class Cart extends JPanel {
 				
 				listModel.removeElement(barcode + " " + description + " $" + fprice);
 			
-			size++;
 			subtotal -= newItem.getPrice();
 			
 			

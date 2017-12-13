@@ -2,10 +2,13 @@ Red Fox POS
 Items
 
 1234160 Misc Shirt $5.00
+1234160 Misc Shirt $5.00
+1234160 Misc Shirt $5.00
+1234160 Misc Shirt $5.00
  
 Sub-Total: $0.00
 Tax: $0.00
 Total: $0.00
-Change Due: $5.00
+Change Due: $20.00
  
 Thank You, Come again soon!

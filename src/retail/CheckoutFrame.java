@@ -19,18 +19,20 @@ public class CheckoutFrame extends JFrame {
 		Item = new JFrame("Checkout");
 		Item.setResizable(false);
 		Item.setTitle("Checkout");
-		Item.setSize(250, 300);
+		Item.setSize(325, 400);
 		DecimalFormat money = new DecimalFormat("0.00");
 		
 		North = new JPanel();
-		North.add(cart.scroll, BorderLayout.NORTH);
+		North.add(cart.scroll);
+		System.out.println(cart.total);
+		JTextArea totals = new JTextArea("Sub-Total: $" + RetailHelper.getCashString(cart.getSubtotal()) + "\n" + 
+											 "Tax: $" + RetailHelper.getCashString(cart.getTotalTax()) + "\n" +
+											"Total: $" + RetailHelper.getCashString(cart.getTotal()));
 		
-		JTextArea totals = new JTextArea("Sub-Total: $" + money.format(((double) cart.subtotal)/100) + "\n" + 
-											 "Tax: $" + money.format(((double) cart.totalTax)/100) + "\n" +
-											"Total: $" + money.format(((double) cart.total)/100));
 		
 		totals.setBackground(null);
-		North.add(totals, BorderLayout.CENTER);
+		totals.setEditable(false);
+		North.add(totals);
 		JTextArea prompt = new JTextArea("  Enter Payment Amount:");
 		prompt.setEditable(false);
 		prompt.setBackground(null);
@@ -60,7 +62,7 @@ public class CheckoutFrame extends JFrame {
 				try {
 					DecimalFormat money = new DecimalFormat("0.00");
 					double payment = Double.parseDouble(input.getText());
-					change = (double) Cart.total - payment;
+					change = ((double) cart.getTotal()) - payment;
 					if (change == 0) {
 						JOptionPane.showMessageDialog(null, "Transaction Complete!");
 						ReceiptGenerator receipt = new ReceiptGenerator();
@@ -82,7 +84,6 @@ public class CheckoutFrame extends JFrame {
 			}
 		});
 		//cart.add(North);
-		
 		Item.add(North, BorderLayout.NORTH);
 		Item.add(information, BorderLayout.CENTER);
 		Item.add(buttons, BorderLayout.SOUTH);
