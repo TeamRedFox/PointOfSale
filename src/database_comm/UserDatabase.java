@@ -2,6 +2,7 @@ package database_comm;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import login.User;
 
@@ -161,6 +162,48 @@ public class UserDatabase
 		}
 
 		return successful;
+	}
+	
+	/**Returns a list of all usernames in the database
+	 * @throws SQLException */
+	public static String[] getAllUsernames() throws SQLException
+	{
+		//Create query to fetch all users
+		DatabaseConnection connection = new DatabaseConnection();
+		String query = "SELECT * FROM USERS";
+		
+		//Create list to store usernames
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try
+		{
+			//Execute our query
+			ResultSet rs = connection.executeQuery(query);
+			ResultSetMetaData metaData = rs.getMetaData();
+			
+			//Display all results from our query
+			while (rs.next())
+			{ 
+				for(int i = 1; i <= metaData.getColumnCount(); i++)
+				{
+					if (metaData.getColumnName(i).equals("USERNAME"))
+					{
+						list.add(rs.getString(i));
+					}
+				}
+			}
+		}
+		catch (SQLException e)
+		{
+			//Throw a SQL exception if we run into one
+			throw e;
+		}
+		finally
+		{
+			//Close the connection regardless of whether we encountered an exception
+			connection.close();
+		}
+		return (String[])list.toArray(new String[0]);
 	}
 	
 	/**FOR DEBUG PURPOSES
