@@ -9,6 +9,6 @@ public class RetailHelper
 		int cents = amount % 100;
 		int dollars = amount - cents;
 		dollars /= 100;
-		return dollars + "." + cents;
+		return dollars + "." + ((cents < 10 ) ? "0" : "") + cents;
 	}
 }
