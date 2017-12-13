@@ -137,6 +137,7 @@ public class AddUserFrame extends JFrame {
 		addNew.setPaswordHash(SecurityHelper.generatePasswordHash(pass));
 		try {
 			UserDatabase.addUser(addNew);
+			User.setAlwaysOnTop(false);
 			JOptionPane.showMessageDialog(null, "User Successfully Added");
 			User.dispose();
 		} catch (SQLException e) {
