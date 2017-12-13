@@ -184,6 +184,20 @@ public class AddUserFrame extends JFrame {
 			
 			error = error + "Invalid Username | ";
 		}
+		else
+		{
+			try {
+				String[] allUsernames = UserDatabase.getAllUsernames();
+				for(int i = 0; i < allUsernames.length; i++) {
+					if (allUsernames[i].toLowerCase().equals(username.toLowerCase())) {
+						error = error + "Username already exists | ";
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	void validPass() {
