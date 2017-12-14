@@ -1,4 +1,5 @@
 package retail;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -34,6 +35,8 @@ public class Cart extends JPanel {
 		
 		scroll.setViewportView(shoppingList);
 		scroll.setSize(300, 150);
+		scroll.setMaximumSize(new Dimension(300, 150));
+		scroll.setPreferredSize(new Dimension(300, 150));
 		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
 	        public void adjustmentValueChanged(AdjustmentEvent e) {  
 	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
