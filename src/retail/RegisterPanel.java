@@ -206,6 +206,37 @@ public class RegisterPanel extends JPanel {
 		
 	}
 	
+	/**Clear all listeners from the panel, used for re-logging in*/
+	public void removeAllListeners()
+	{
+		removeActionListeners(logOutBtn);
+		removeActionListeners(searchBtn);
+		removeActionListeners(searchTxt);
+		removeActionListeners(addUserBtn);
+		removeActionListeners(voidItemBtn);
+		removeActionListeners(delUserBtn);
+		removeActionListeners(addProductBtn);
+		removeActionListeners(delProductBtn);
+		removeActionListeners(checkOutBtn);
+		removeActionListeners(voidTransactionBtn);
+	}
+	
+	void removeActionListeners(JButton button)
+	{
+		ActionListener[] listeners = button.getActionListeners();
+		for(ActionListener listener : listeners) {
+			button.removeActionListener(listener);
+		}
+	}
+
+	void removeActionListeners(JTextField textField)
+	{
+		ActionListener[] listeners = textField.getActionListeners();
+		for(ActionListener listener : listeners) {
+			textField.removeActionListener(listener);
+		}
+	}
+	
 	// getters and setters
 	public JPanel getRegisterPnl() {
 		return registerPnl;

@@ -56,7 +56,8 @@ public class CheckoutFrame extends JFrame {
 		
 		JButton enter = new JButton("Checkout");
 		buttons.add(enter);
-		enter.addActionListener(new ActionListener() {
+		
+		ActionListener checkOut = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Item.setAlwaysOnTop(false);
@@ -73,14 +74,14 @@ public class CheckoutFrame extends JFrame {
 						
 					} else if (change < 0){
 						change = Math.abs(change);
-						JOptionPane.showMessageDialog(null, "Transaction Complete! Change Due: $" + RetailHelper.getCashString(change));
+						JOptionPane.showMessageDialog(null, "Transaction Complete!" + System.lineSeparator()+ " Change Due: $" + RetailHelper.getCashString(change));
 						ReceiptGenerator receipt = new ReceiptGenerator(cart);
 						
 						cart.removeAllItems();
 						Item.dispose();
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "Transaction Incomplete! $" + RetailHelper.getCashString(change) + " is due.");
+						JOptionPane.showMessageDialog(null, "Transaction Incomplete!" + System.lineSeparator()+ " $" + RetailHelper.getCashString(change) + " is due.");
 						Item.setAlwaysOnTop(true);
 					}
 					
@@ -89,7 +90,11 @@ public class CheckoutFrame extends JFrame {
 					
 				}
 			}
-		});
+		};
+
+		enter.addActionListener(checkOut);
+		input.addActionListener(checkOut);
+		
 		//cart.add(North);
 		
 		Item.add(North, BorderLayout.NORTH);

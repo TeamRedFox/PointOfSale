@@ -128,6 +128,7 @@ public class POS_GUI_Controller extends JFrame {
 					if(newUser != null) {
 						//selectionScreen();
 						setFrameTitle(username);
+						System.out.print("WOW");
 						registerPanel = new RegisterPanel(newUser, cart);
 						registerPanel.getLogOutBtn().addActionListener(logOut);
 						registerPanel.getSearchBtn().addActionListener(addItem);
@@ -183,11 +184,17 @@ public class POS_GUI_Controller extends JFrame {
 					card.show(c,"login");
 					setFrameTitle("POS");
 					card.removeLayoutComponent(registerPanel);
+					
+					registerPanel.removeAllListeners();
 					c.remove(registerPanel);
+					
+					cart.removeAllItems();
 		
 					loginPanel.getErrorLbl().setText("");
 					reformatScreen();
-					loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
+					loginPanel.getUsernameTxt().setText("");
+					loginPanel.getPasswordTxt().setText("");
+					loginPanel.getUsernameTxt().requestFocus(); // focuses on the password when logging out
 			    }
 			    
 		}
@@ -282,7 +289,10 @@ public class POS_GUI_Controller extends JFrame {
 	
 	ActionListener checkout = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			CheckoutFrame check = new CheckoutFrame(cart);
+			if (cart.getCartSize() <= 0)
+				JOptionPane.showMessageDialog(null, "You must have items in the cart to checkout");
+			else
+				new CheckoutFrame(cart);
 		}
 	};
 }

@@ -5,7 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,8 +33,10 @@ public class LoginPanel extends JPanel {
 	JPasswordField passwordTxt = new JPasswordField(10);
 	JButton signInBtn = new JButton("Sign In");
 	JLabel errorLbl = new JLabel();
+
+	private BufferedImage logoImage;
 	
-	private static String message = "\nWelcome to TeamRedFox's POS System \n Enter your user credentials below!";
+	private static String message = System.lineSeparator() + "Welcome to TeamRedFox's POS System"+ System.lineSeparator() + "Enter your user credentials below!";
 	private static final int START_ROWS = 5;
 	private static final int START_COLUMNS = 1;
 	
@@ -38,7 +45,7 @@ public class LoginPanel extends JPanel {
 		welcome.setEditable(false);
 		welcome.setText(message);
 		welcome.setBackground(this.getBackground());
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		welcome.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		//inspired by http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
 		//Centering welcome text
@@ -76,6 +83,20 @@ public class LoginPanel extends JPanel {
 		
 		this.add(infoPanel, BorderLayout.SOUTH);
 	
+		addImage();
+	}
+
+	
+	void addImage()
+	{
+		try {
+			logoImage = ImageIO.read(new File("logo.png"));
+			JLabel logoLabel = new JLabel(new ImageIcon(logoImage));
+			this.add(logoLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public JTextField getUsernameTxt() {

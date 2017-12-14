@@ -124,6 +124,12 @@ public class RemoveUserFrame extends JFrame {
 			return false;
 		}
 		
+		if (username.isEmpty())
+		{
+			error = "Invalid username";
+			return false;
+		}
+		
 		try {
 			if (!UserDatabase.doesUserExist(username))
 			{
