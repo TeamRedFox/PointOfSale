@@ -133,7 +133,7 @@ public class Cart extends JPanel {
 		fTot.setText("Total: $" + RetailHelper.getCashString(total));
 	}
 	
-	public void requestSearchFieldFocus()
+	public void requestItemSearchFocus()
 	{
 		registerPanel.getSearchTxt().requestFocus();
 	}
@@ -221,7 +221,7 @@ public class Cart extends JPanel {
 	{
 		resetCartFields();
 		updatePriceFields();
-		requestSearchFieldFocus();
+		requestItemSearchFocus();
 	}
 	
 	public int getCartSize() {
