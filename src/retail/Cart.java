@@ -28,6 +28,8 @@ public class Cart extends JPanel {
 	protected static JPanel subP, totP,fTotP, pricing = new JPanel();
 	protected static String Cart = "";
 	
+	private RegisterPanel registerPanel;
+	
 	//constructor to create an arraylist for cart with a default size of 100
 	public Cart() {
 		DecimalFormat money = new DecimalFormat("0.00");
@@ -103,6 +105,16 @@ public class Cart extends JPanel {
 //		this.setTotal(0);
 //	}
 	
+	public void setRegisterPanel(RegisterPanel registerPanel)
+	{
+		this.registerPanel = registerPanel;
+	}
+	
+	public RegisterPanel getRegisterPanel()
+	{
+		return registerPanel;
+	}
+	
 	void resetCartFields()
 	{
 		list = new ArrayList<Item> (100);
@@ -119,6 +131,11 @@ public class Cart extends JPanel {
 		sub.setText("Sub-Total: $" + RetailHelper.getCashString(subtotal));
 		tot.setText("Tax: $" + RetailHelper.getCashString(totalTax));
 		fTot.setText("Total: $" + RetailHelper.getCashString(total));
+	}
+	
+	public void requestSearchFieldFocus()
+	{
+		registerPanel.getSearchTxt().requestFocus();
 	}
 	
 	//add an item to cart
@@ -204,6 +221,7 @@ public class Cart extends JPanel {
 	{
 		resetCartFields();
 		updatePriceFields();
+		requestSearchFieldFocus();
 	}
 	
 	public int getCartSize() {

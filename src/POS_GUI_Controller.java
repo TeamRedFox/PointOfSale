@@ -142,6 +142,7 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getVoidItemBtn().addActionListener(itemVoid);
 						registerPanel.getCheckoutBtn().addActionListener(checkout);
 						
+						cart.setRegisterPanel(registerPanel);
 
 						c.add("profile", registerPanel);
 						card.show(c, "profile");
