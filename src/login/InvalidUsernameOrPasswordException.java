@@ -27,7 +27,7 @@ public class InvalidUsernameOrPasswordException extends RuntimeException{
 		if (invalidField.equals("invalid")){
 			message = "Invalid credentials. Please try again.";
 		}
-		if (invalidField.equals("username")) {
+		else if (invalidField.equals("username")) {
 			message = "The inputted username does not match any in our system.";
 		}
 		else if (invalidField.equals("password")) {
@@ -37,7 +37,7 @@ public class InvalidUsernameOrPasswordException extends RuntimeException{
 			message = "One or more login fields are empty.";
 		}
 		
-		return message + " " + LocalDate.now() + " " + LocalTime.now(); // adds timestamp when error  occured, remove if needed
+		return message;// + " " + LocalDate.now() + " " + LocalTime.now(); // adds timestamp when error  occured, remove if needed
 	}
 	
 }

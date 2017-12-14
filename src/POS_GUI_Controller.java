@@ -148,6 +148,10 @@ public class POS_GUI_Controller extends JFrame {
 						registerPanel.getSearchTxt().requestFocus();
 						reformatScreen();	
 					}
+					else
+					{
+						throw new InvalidUsernameOrPasswordException("invalid");
+					}
 
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
