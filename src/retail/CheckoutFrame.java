@@ -130,11 +130,11 @@ public class CheckoutFrame extends JFrame {
 
 
 			if(i == 10){
-				numBtn.setText(String.valueOf("."));
+				numBtn.setText(String.valueOf("0"));
 				numBtn.addActionListener(e -> RetailHelper.addToTextField(input, numBtn.getText()));
 			}
 			else if (i == 11) {
-				numBtn.setText(String.valueOf("0"));
+				numBtn.setText(String.valueOf("."));
 				numBtn.addActionListener(e -> RetailHelper.addToTextField(input, numBtn.getText()));
 			}
 			else if (i == 12) {
