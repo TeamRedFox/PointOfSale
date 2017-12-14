@@ -67,7 +67,7 @@ public class Item
 	//TODO better toString representation
 	public String toString()
 	{
-		return barcode + ", " + description + ", $" + RetailHelper.getCashString(price) + (taxable ? ", taxable" : ", not taxable"); 
+		return barcode + ", " + description + ", $" + RetailHelper.getCashString(price); 
 	}
 
 }

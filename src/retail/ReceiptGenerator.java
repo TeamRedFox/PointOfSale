@@ -29,13 +29,18 @@ public class ReceiptGenerator{
 					
 				} 
 				*/
-				for(int i = 0; i  < Cart.listModel.size(); i++) {
-					cart = cart + "\n" + Cart.listModel.getElementAt(i).toString();
-					System.out.println(cart);	
-					}
+			
 				
 				writer.println("Items");
-				writer.println(cart);
+				
+				for(Item i : Cart.list){
+					writer.println(i.toString());
+				}
+				/*for(int i = 0; i  < Cart.listModel.size(); i++) {
+					cart = Cart.listModel.getElementAt(i).toString();
+					writer.println(cart);	
+				}
+				*/
 				writer.println(" "); 
 				writer.println("Sub-Total: $" + money.format(((double) info.subtotal)/100));
 				writer.println("Tax: $" + money.format(((double) info.totalTax)/100));

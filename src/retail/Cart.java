@@ -110,7 +110,8 @@ public class Cart extends JPanel {
 			
 			String fprice = money.format(price);
 			
-			listModel.addElement(barcode + " " + description + " $" + fprice);
+			//listModel.addElement(barcode + " " + description + " $" + fprice);
+			listModel.addElement(newItem.toString());
 			Cart = Cart + "\n" + 
 			
 			size++;
@@ -228,5 +229,9 @@ public class Cart extends JPanel {
 		this.total = newTotal;
 		
 	}
+	
+	
+	
+	
 	
 }
