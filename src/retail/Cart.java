@@ -128,6 +128,13 @@ public class Cart extends JPanel {
 	
 	void updatePriceFields()
 	{
+		if (subtotal < 0)
+			subtotal = 0;
+		if (total < 0)
+			total = 0;
+		if (totalTax < 0)
+			totalTax = 0;
+		
 		sub.setText("Sub-Total: $" + RetailHelper.getCashString(subtotal));
 		tot.setText("Tax: $" + RetailHelper.getCashString(totalTax));
 		fTot.setText("Total: $" + RetailHelper.getCashString(total));
