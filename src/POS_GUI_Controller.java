@@ -128,6 +128,7 @@ public class POS_GUI_Controller extends JFrame {
 					if(newUser != null) {
 						//selectionScreen();
 						setFrameTitle(username);
+						System.out.print("WOW");
 						registerPanel = new RegisterPanel(newUser, cart);
 						registerPanel.getLogOutBtn().addActionListener(logOut);
 						registerPanel.getSearchBtn().addActionListener(addItem);
@@ -183,6 +184,8 @@ public class POS_GUI_Controller extends JFrame {
 					card.show(c,"login");
 					setFrameTitle("POS");
 					card.removeLayoutComponent(registerPanel);
+					
+					registerPanel.removeAllListeners();
 					c.remove(registerPanel);
 					
 					cart.removeAllItems();

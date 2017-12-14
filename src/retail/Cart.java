@@ -32,6 +32,8 @@ public class Cart extends JPanel {
 	public Cart() {
 		DecimalFormat money = new DecimalFormat("0.00");
 		
+		
+		System.out.println("CREATING CART");
 		resetCartFields();
 	
 		//add(shoppingList);
@@ -116,38 +118,40 @@ public class Cart extends JPanel {
 	
 	//add an item to cart
 	public void addItem(Item newItem){
+		System.out.println("adding item");
+		if (newItem == null) {
+			JOptionPane.showMessageDialog(null, "Product not Found");
+			return;
+		}
+
 		DecimalFormat money = new DecimalFormat("0.00");
-		try {
-			list.add(newItem);
-			String barcode = newItem.getBarcode();
-			String description = newItem.getDescription();
-			Double price = ((double) newItem.getPrice()) / 100;
+		
+		
+		list.add(newItem);
+		String barcode = newItem.getBarcode();
+		String description = newItem.getDescription();
+		Double price = ((double) newItem.getPrice()) / 100;
+		
+		String fprice = money.format(price);
+		
+		//listModel.addElement(barcode + " " + description + " $" + fprice);
+		listModel.addElement(RetailHelper.getRegisterItemString(newItem));
+		Cart = Cart + System.lineSeparator() + 
+		
+		size++;
+		subtotal += newItem.getPrice();
+		
+		
+		if (newItem.isTaxable()) {
 			
-			String fprice = money.format(price);
+			this.setTotal( (int) (this.getTotal() + (newItem.getPrice() * .07)));
+			totalTax += (newItem.getPrice() * .07);
 			
-			//listModel.addElement(barcode + " " + description + " $" + fprice);
-			listModel.addElement(RetailHelper.getRegisterItemString(newItem));
-			Cart = Cart + System.lineSeparator() + 
-			
-			size++;
-			subtotal += newItem.getPrice();
-			
-			
-			if (newItem.isTaxable()) {
-				
-				this.setTotal( (int) (this.getTotal() + (newItem.getPrice() * .07)));
-				totalTax += (newItem.getPrice() * .07);
-				
-			}
-			
-			total += newItem.getPrice();
-			
-			updatePriceFields();
-			
-		}catch(NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Product not Found");	
 		}
 		
+		total += newItem.getPrice();
+		
+		updatePriceFields();
 		
 	}
 	
