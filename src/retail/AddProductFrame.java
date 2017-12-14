@@ -108,7 +108,7 @@ public class AddProductFrame {
 		buttons.add(enter);
 		enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				error = "Invalid Entry: ";
+				error = "";
 				
 
 				if(taxable.isSelected()) {
@@ -162,20 +162,22 @@ public class AddProductFrame {
 	
 	public void vData() {
 		
+		Item.setAlwaysOnTop(false);
+		error = "";
+		
 		validName();
 		validBarcode();
 		validDescription();
 		validPrice();
 		
-		if (error.length() > 15) {
-			JOptionPane.showMessageDialog(null, error);
+		if (error.isEmpty()) {
+			addItem(Name, Barcode, Description, finalCost, Taxable);
 		}
 		else {
-			addItem(Name, Barcode, Description, finalCost, Taxable);
-			//System.out.println(Name + Barcode + Description + finalCost + Taxable);
+			JOptionPane.showMessageDialog(null, error);
 		}
-		
-		
+
+		Item.setAlwaysOnTop(true);
 	}
 	
 	public  void validName() {
