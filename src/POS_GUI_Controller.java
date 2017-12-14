@@ -289,7 +289,10 @@ public class POS_GUI_Controller extends JFrame {
 	
 	ActionListener checkout = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			CheckoutFrame check = new CheckoutFrame(cart);
+			if (cart.getCartSize() <= 0)
+				JOptionPane.showMessageDialog(null, "You must have items in the cart to checkout");
+			else
+				new CheckoutFrame(cart);
 		}
 	};
 }
