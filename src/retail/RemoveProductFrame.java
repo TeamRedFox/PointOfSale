@@ -126,7 +126,7 @@ public class RemoveProductFrame {
 		}
 		
 
-		ItemR.setAlwaysOnTop(false);
+		ItemR.setAlwaysOnTop(true);
 	}
 	
 	
