@@ -184,6 +184,8 @@ public class POS_GUI_Controller extends JFrame {
 					setFrameTitle("POS");
 					card.removeLayoutComponent(registerPanel);
 					c.remove(registerPanel);
+					
+					cart.removeAllItems();
 		
 					loginPanel.getErrorLbl().setText("");
 					reformatScreen();
