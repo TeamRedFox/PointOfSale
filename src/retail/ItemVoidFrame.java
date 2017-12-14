@@ -58,12 +58,13 @@ public class ItemVoidFrame extends JFrame {
 				try {
 					String barcode = input.getText();
 					cart.removeItem(barcode);
-					Item.dispose();	
 				} catch(Exception e3) {
 					JOptionPane.showMessageDialog(null, "Product not Found");
 				}
 
 				Item.setAlwaysOnTop(true);
+				Item.dispose();
+				cart.requestItemSearchFocus();
 			}
 		});
 		
@@ -76,6 +77,8 @@ public class ItemVoidFrame extends JFrame {
 		Item.add(combo);
 		Item.setVisible(true);
 		Item.setAlwaysOnTop(true);
+
+		input.requestFocus();
 	}
 
 }
