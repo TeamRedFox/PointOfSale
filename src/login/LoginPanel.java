@@ -36,7 +36,7 @@ public class LoginPanel extends JPanel {
 
 	private BufferedImage logoImage;
 	
-	private static String message = "\nWelcome to TeamRedFox's POS System \n Enter your user credentials below!";
+	private static String message = System.lineSeparator() + "Welcome to TeamRedFox's POS System"+ System.lineSeparator() + "Enter your user credentials below!";
 	private static final int START_ROWS = 5;
 	private static final int START_COLUMNS = 1;
 	
@@ -45,7 +45,7 @@ public class LoginPanel extends JPanel {
 		welcome.setEditable(false);
 		welcome.setText(message);
 		welcome.setBackground(this.getBackground());
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		welcome.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		//inspired by http://stackoverflow.com/questions/3213045/centering-text-in-a-jtextarea-or-jtextpane-horizontal-text-alignment
 		//Centering welcome text

@@ -127,7 +127,7 @@ public class Cart extends JPanel {
 			
 			//listModel.addElement(barcode + " " + description + " $" + fprice);
 			listModel.addElement(RetailHelper.getRegisterItemString(newItem));
-			Cart = Cart + "\n" + 
+			Cart = Cart + System.lineSeparator() + 
 			
 			size++;
 			subtotal += newItem.getPrice();

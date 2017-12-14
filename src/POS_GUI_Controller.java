@@ -187,7 +187,9 @@ public class POS_GUI_Controller extends JFrame {
 		
 					loginPanel.getErrorLbl().setText("");
 					reformatScreen();
-					loginPanel.getPasswordTxt().requestFocus(); // focuses on the password when logging out
+					loginPanel.getUsernameTxt().setText("");
+					loginPanel.getPasswordTxt().setText("");
+					loginPanel.getUsernameTxt().requestFocus(); // focuses on the password when logging out
 			    }
 			    
 		}
