@@ -171,21 +171,25 @@ public class AddProductFrame {
 	}
 	
 	public void validBarcode() {
-		if (Barcode.length() > 6 && Barcode.length() < 12) {
-			if(Barcode.equals(Barcode2)) {
-				
-			} else {
-				
-				error = error + "Barcodes do not match | ";
-			}
-		} else {
+		if(!Barcode.equals(Barcode2)) {
 			error = error + "Barcodes do not match | ";
+		} else if (Barcode.isEmpty()) {
+
+			error = error + "Invalid barcode | ";
+		}
+		else {
+			try {
+				if (ItemDatabase.getItemFromBarcode(Barcode) != null)
+						error = error + "Item already exists | ";
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
 	
 	public void validDescription() {
-		if(Description.length() <= 4) {
+		if(Description.length() < 1) {
 			
 			error = error + "Invalid Description | ";
 		}
