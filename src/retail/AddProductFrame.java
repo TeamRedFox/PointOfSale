@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 import database_comm.ItemDatabase;
 
 public class AddProductFrame {
-	private String Name;
 	private String Barcode;
 	private String Description;
 	private String Price;
@@ -46,14 +45,6 @@ public class AddProductFrame {
 		
 		Panel information = new Panel();
 		information.setLayout(new GridLayout(6,2));
-		
-		JTextArea itemName = new JTextArea("  Item Name:");
-		itemName.setEditable(false);
-		itemName.setBackground(null);
-		JTextField iName = new JTextField();
-		iName.setColumns(7);
-		information.add(itemName);
-		information.add(iName);
 		
 		JTextArea barcode = new JTextArea("  Barcode:");
 		barcode.setEditable(false);
@@ -114,7 +105,6 @@ public class AddProductFrame {
 				if(taxable.isSelected()) {
 					Taxable = true;
 				}
-				Name = iName.getText();
 				Barcode = barcodeE.getText();
 				Barcode2 = barcode1E.getText();
 				Description = descriptionE.getText();
@@ -165,13 +155,12 @@ public class AddProductFrame {
 		Item.setAlwaysOnTop(false);
 		error = "";
 		
-		validName();
 		validBarcode();
 		validDescription();
 		validPrice();
 		
 		if (error.isEmpty()) {
-			addItem(Name, Barcode, Description, finalCost, Taxable);
+			addItem(Barcode, Barcode, Description, finalCost, Taxable);
 		}
 		else {
 			error = error.substring(0, error.length() - 3);
@@ -179,12 +168,6 @@ public class AddProductFrame {
 		}
 
 		Item.setAlwaysOnTop(true);
-	}
-	
-	public  void validName() {
-		if (Name.length() <= 2) {
-			error = error + "Invalid First Name | ";
-		}
 	}
 	
 	public void validBarcode() {
