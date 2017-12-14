@@ -1,9 +1,19 @@
 package retail;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class CheckoutFrame extends JFrame {
 
@@ -99,8 +109,57 @@ public class CheckoutFrame extends JFrame {
 		
 		Item.add(North, BorderLayout.NORTH);
 		Item.add(information, BorderLayout.CENTER);
-		Item.add(buttons, BorderLayout.SOUTH);
+		//Item.add(buttons, BorderLayout.SOUTH);
 		Item.setVisible(true);
 		Item.setAlwaysOnTop(true);
+		
+		Panel numPanel = new Panel();
+		addNumpad(numPanel, input);
+		Item.add(numPanel, BorderLayout.SOUTH);
+		numPanel.add(buttons, BorderLayout.SOUTH);
+	}
+	
+	public void addNumpad(Panel panel, JTextField input)
+	{
+		JPanel numPnl = new JPanel(new GridLayout(4,3));
+		JPanel zeroPnl = new JPanel(new BorderLayout());
+		
+		for(int i = 1; i < 12; i++){
+			
+			JButton numBtn = new JButton();
+
+
+			if(i == 10){
+				numBtn.setText(String.valueOf("."));
+				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;
+			}
+			else if (i == 11) {
+				numBtn.setText(String.valueOf("0"));
+				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;
+			}
+			else {
+				numBtn.setText(String.valueOf(i));
+				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;				
+			}
+			numPnl.add(numBtn);
+				
+//				JButton zeroBtn = new JButton();
+//				zeroBtn.setText("0");
+//				zeroBtn.addActionListener(e -> input.setText(input.getText()+ "" + zeroBtn.getText()));
+//				zeroPnl.add(zeroBtn, BorderLayout.CENTER);
+//				barcodePnl.add(b, BorderLayout.SOUTH);
+//			}
+		}
+		JPanel eastNumPnl = new JPanel();
+		eastNumPnl.setLayout(new BoxLayout(eastNumPnl, BoxLayout.PAGE_AXIS));
+
+		Dimension size = new Dimension(100, 100);
+		zeroPnl.setPreferredSize(size);
+		zeroPnl.setSize(size);
+		zeroPnl.setMaximumSize(size);
+
+		
+		panel.add(numPnl, BorderLayout.SOUTH);
+		//panel.add(zeroPnl, BorderLayout.SOUTH);
 	}
 }
