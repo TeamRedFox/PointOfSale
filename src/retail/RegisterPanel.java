@@ -2,19 +2,15 @@ package retail;
 
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -127,6 +123,11 @@ public class RegisterPanel extends JPanel {
 		clearBtn.addActionListener(e -> searchTxt.setText(""));
 		
 		barcodePnl.add(clearBtn, BorderLayout.EAST);
+		
+		Dimension size = new Dimension(100, 100);
+		zeroPnl.setPreferredSize(size);
+		zeroPnl.setSize(size);
+		zeroPnl.setMaximumSize(size);
 		
 		barcodePnl.add(zeroPnl, BorderLayout.SOUTH);
 		barcodePnl.add(numPnl, BorderLayout.CENTER);
