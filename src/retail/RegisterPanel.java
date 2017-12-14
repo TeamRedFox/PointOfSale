@@ -105,14 +105,14 @@ public class RegisterPanel extends JPanel {
 			JButton numBtn = new JButton();
 			numBtn.setText(String.valueOf(i));
 			searchString = searchTxt.getText();
-			numBtn.addActionListener(e -> searchTxt.setText(searchTxt.getText() + "" + numBtn.getText())) ;
+			numBtn.addActionListener(e -> RetailHelper.addToTextField(searchTxt, numBtn.getText()));
 			numPnl.add(numBtn);
 			
 			
 			if(i == 9){
 				JButton zeroBtn = new JButton();
 				zeroBtn.setText("0");
-				zeroBtn.addActionListener(e -> searchTxt.setText(searchTxt.getText()+ "" + zeroBtn.getText()));
+				zeroBtn.addActionListener(e -> RetailHelper.addToTextField(searchTxt, zeroBtn.getText()));
 				zeroPnl.add(zeroBtn, BorderLayout.CENTER);
 				//barcodePnl.add(b, BorderLayout.SOUTH);
 			}
@@ -120,7 +120,7 @@ public class RegisterPanel extends JPanel {
 		JPanel eastNumPnl = new JPanel();
 		eastNumPnl.setLayout(new BoxLayout(eastNumPnl, BoxLayout.PAGE_AXIS));
 		// add listeners - maybe move to a method in POS GUI?
-		clearBtn.addActionListener(e -> searchTxt.setText(""));
+		clearBtn.addActionListener(e -> RetailHelper.setTextField(searchTxt, ""));
 		
 		barcodePnl.add(clearBtn, BorderLayout.EAST);
 		

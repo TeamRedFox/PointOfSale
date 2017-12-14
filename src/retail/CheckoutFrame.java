@@ -124,22 +124,26 @@ public class CheckoutFrame extends JFrame {
 		JPanel numPnl = new JPanel(new GridLayout(4,3));
 		JPanel zeroPnl = new JPanel(new BorderLayout());
 		
-		for(int i = 1; i < 12; i++){
+		for(int i = 1; i < 13; i++){
 			
 			JButton numBtn = new JButton();
 
 
 			if(i == 10){
 				numBtn.setText(String.valueOf("."));
-				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;
+				numBtn.addActionListener(e -> RetailHelper.addToTextField(input, numBtn.getText()));
 			}
 			else if (i == 11) {
 				numBtn.setText(String.valueOf("0"));
-				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;
+				numBtn.addActionListener(e -> RetailHelper.addToTextField(input, numBtn.getText()));
+			}
+			else if (i == 12) {
+				numBtn.setText(String.valueOf("clr"));
+				numBtn.addActionListener(e -> RetailHelper.setTextField(input, ""));
 			}
 			else {
 				numBtn.setText(String.valueOf(i));
-				numBtn.addActionListener(e -> input.setText(input.getText() + "" + numBtn.getText())) ;				
+				numBtn.addActionListener(e -> RetailHelper.addToTextField(input, numBtn.getText()));				
 			}
 			numPnl.add(numBtn);
 				

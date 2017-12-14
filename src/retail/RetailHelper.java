@@ -1,5 +1,7 @@
 package retail;
 
+import javax.swing.JTextField;
+
 public class RetailHelper
 {
 	
@@ -45,5 +47,19 @@ public class RetailHelper
 		}
 		
 		return string;
+	}
+	
+	/**For numpad input, sets the text field to a certain text*/
+	public static void setTextField(JTextField textField, String text)
+	{
+		textField.setText(text);
+		textField.requestFocus();
+	}
+
+	/**For numpad input, adds text to the text field*/
+	public static void addToTextField(JTextField textField, String add)
+	{
+		textField.setText(textField.getText() + add);
+		textField.requestFocus();
 	}
 }
