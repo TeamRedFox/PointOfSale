@@ -67,12 +67,16 @@ public class CheckoutFrame extends JFrame {
 					if (change == 0) {
 						JOptionPane.showMessageDialog(null, "Transaction Complete!");
 						ReceiptGenerator receipt = new ReceiptGenerator(cart);
+
+						cart.removeAllItems();
 						Item.dispose();
 						
 					} else if (change < 0){
 						change = Math.abs(change);
 						JOptionPane.showMessageDialog(null, "Transaction Complete! Change Due: $" + RetailHelper.getCashString(change));
 						ReceiptGenerator receipt = new ReceiptGenerator(cart);
+						
+						cart.removeAllItems();
 						Item.dispose();
 						
 					} else {
