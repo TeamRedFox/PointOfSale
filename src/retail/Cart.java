@@ -45,6 +45,11 @@ public class Cart extends JPanel {
 		fTot = new JTextArea();
 		
 		updatePriceFields();
+
+		Font font = new Font(sub.getFont().getFontName(), Font.PLAIN, 24);
+		sub.setFont(font);
+		tot.setFont(font);
+		fTot.setFont(font);
 	
 		sub.setBackground(null);
 		tot.setBackground(null);
