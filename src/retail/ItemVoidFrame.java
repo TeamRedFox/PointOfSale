@@ -20,7 +20,7 @@ public class ItemVoidFrame extends JFrame {
 		Item.setLocationRelativeTo(null);
 		
 		Panel greeting = new Panel();
-		JTextArea greet = new JTextArea("Please enter the following information");
+		JTextArea greet = new JTextArea("Please scan the item you wish to void");
 		greet.setBackground(null);
 		greet.setEditable(false);
 		greeting.add(greet, BorderLayout.CENTER);
