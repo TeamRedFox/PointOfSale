@@ -117,6 +117,8 @@ public class CheckoutFrame extends JFrame {
 		addNumpad(numPanel, input);
 		Item.add(numPanel, BorderLayout.SOUTH);
 		numPanel.add(buttons, BorderLayout.SOUTH);
+		
+		input.requestFocus();
 	}
 	
 	public void addNumpad(Panel panel, JTextField input)
