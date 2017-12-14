@@ -178,40 +178,47 @@ public class Cart extends JPanel {
 	}
 	
 	//remove item at specified index
-	public  void removeItem(Item newItem){
+	public  void removeItem(String barcode){
 		
 		DecimalFormat money = new DecimalFormat("0.00");
 		
-		
-		try {
-			
-			list.remove(newItem);
-			String barcode = newItem.getBarcode();
-			String description = newItem.getDescription();
-			Double price = ((double) newItem.getPrice()) / 100;
-			
-			String fprice = money.format(price);
-				
-				listModel.removeElement(barcode + " " + description + " $" + fprice);
-			
-			subtotal -= newItem.getPrice();
-			
-			
-			if (newItem.isTaxable()) {
-				
-				total -= (newItem.getPrice() * .07);
-				totalTax -= (newItem.getPrice() * .07);
-				
-			}
-			
-			total -= newItem.getPrice();
 
-			updatePriceFields();
-			
-		} catch (Exception a) {
-			
-			JOptionPane.showMessageDialog(null, "Product not Found");
+		Item newItem = null;
+		for(int i = list.size() - 1; i >= 0; i--)
+		{
+			if (list.get(i).getBarcode().equals(barcode))
+			{
+				newItem = list.get(i);
+				break;
+			}
 		}
+		if (newItem == null)
+		{
+			JOptionPane.showMessageDialog(null, "Product not Found");
+			return;
+		}
+		
+		list.remove(newItem);
+		for(int i = listModel.size() - 1; i >= 0; i--)
+		{
+			if (listModel.getElementAt(i).toString().equals(RetailHelper.getRegisterItemString(newItem)))
+			{
+				listModel.removeElementAt(i);
+				break;
+			}
+		}
+		
+		subtotal -= newItem.getPrice();
+		if (newItem.isTaxable()) {
+			
+			total -= (newItem.getPrice() * .07);
+			totalTax -= (newItem.getPrice() * .07);
+			
+		}
+		
+		total -= newItem.getPrice();
+
+		updatePriceFields();
 		
 		
 	}

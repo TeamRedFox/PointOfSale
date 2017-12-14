@@ -52,19 +52,18 @@ public class ItemVoidFrame extends JFrame {
 		buttons.add(enter);
 		enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				Item.setAlwaysOnTop(false);
 				
 				try {
-					String user = input.getText();
-					Item product = ItemDatabase.getItemFromBarcode(user);
-					cart.removeItem(product);
-					Item.dispose();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Product not Found");	
+					String barcode = input.getText();
+					cart.removeItem(barcode);
+					Item.dispose();	
 				} catch(Exception e3) {
 					JOptionPane.showMessageDialog(null, "Product not Found");
 				}
+
+				Item.setAlwaysOnTop(true);
 			}
 		});
 		
