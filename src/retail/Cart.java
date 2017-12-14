@@ -1,5 +1,6 @@
 package retail;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -21,7 +22,7 @@ public class Cart extends JPanel {
 	protected  int totalTax = 0;
 	
 	protected static DefaultListModel listModel = new DefaultListModel();
-	protected JList shoppingList = new JList(listModel);
+	//protected JList shoppingList = new JList(listModel);
 	protected JScrollPane scroll = new JScrollPane();
 	protected JTextArea sub, tot, fTot;
 	protected static JPanel subP, totP,fTotP, pricing = new JPanel();
@@ -68,10 +69,15 @@ public class Cart extends JPanel {
 	public JScrollPane generateScrollPane()
 	{	
 		JScrollPane newScroll = new JScrollPane();
-		newScroll.setViewportView(new JList(listModel));
-		newScroll.setSize(300, 150);
-		newScroll.setMaximumSize(new Dimension(300, 150));
-		newScroll.setPreferredSize(new Dimension(300, 150));
+		JList list = new JList(listModel);
+		list.setFont( new Font("monospaced", Font.PLAIN, 12) );
+		newScroll.setViewportView(list);
+		
+		Dimension listSize = new Dimension(400, 150);
+		newScroll.setSize(listSize);
+		newScroll.setMaximumSize(listSize);
+		newScroll.setPreferredSize(listSize);
+		
 		newScroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
 	        public void adjustmentValueChanged(AdjustmentEvent e) {  
 	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
@@ -121,7 +127,7 @@ public class Cart extends JPanel {
 			String fprice = money.format(price);
 			
 			//listModel.addElement(barcode + " " + description + " $" + fprice);
-			listModel.addElement(newItem.toString());
+			listModel.addElement(RetailHelper.getRegisterItemString(newItem));
 			Cart = Cart + "\n" + 
 			
 			size++;

@@ -18,7 +18,7 @@ public class CheckoutFrame extends JFrame {
 		Item = new JFrame("Checkout");
 		Item.setResizable(false);
 		Item.setTitle("Checkout");
-		Item.setSize(500, 350);
+		Item.setSize(550, 350);
 		Item.setLocationRelativeTo(null);
 	
 		DecimalFormat money = new DecimalFormat("0.00");
