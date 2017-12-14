@@ -32,18 +32,10 @@ public class Cart extends JPanel {
 		DecimalFormat money = new DecimalFormat("0.00");
 		
 		resetCartFields();
-		
-		scroll.setViewportView(shoppingList);
-		scroll.setSize(300, 150);
-		scroll.setMaximumSize(new Dimension(300, 150));
-		scroll.setPreferredSize(new Dimension(300, 150));
-		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
-	        public void adjustmentValueChanged(AdjustmentEvent e) {  
-	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
-	        }
-	    }); 
+	
 		//add(shoppingList);
 		
+		scroll = generateScrollPane();
 
 		sub = new JTextArea();
 		tot = new JTextArea();
@@ -71,6 +63,21 @@ public class Cart extends JPanel {
 		//pricing.add(totP);
 		//pricing.add(fTotP);
 		//add(pricing);
+	}
+	
+	public JScrollPane generateScrollPane()
+	{	
+		JScrollPane newScroll = new JScrollPane();
+		newScroll.setViewportView(new JList(listModel));
+		newScroll.setSize(300, 150);
+		newScroll.setMaximumSize(new Dimension(300, 150));
+		newScroll.setPreferredSize(new Dimension(300, 150));
+		newScroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+	        }
+	    }); 
+		return newScroll;
 	}
 	
 	//constructor to create an arraylist for cart with a specified size

@@ -24,7 +24,7 @@ public class CheckoutFrame extends JFrame {
 		DecimalFormat money = new DecimalFormat("0.00");
 		
 		North = new JPanel();
-		North.add(cart.scroll, BorderLayout.NORTH);
+		North.add(cart.generateScrollPane(), BorderLayout.NORTH);
 		
 		JTextArea totals = new JTextArea("Sub-Total: $" + money.format(((double) cart.subtotal)/100) + "\n" + 
 											 "Tax: $" + money.format(((double) cart.totalTax)/100) + "\n" +
