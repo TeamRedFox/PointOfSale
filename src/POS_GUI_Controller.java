@@ -12,18 +12,18 @@ import com.sun.glass.events.KeyEvent;
 
 import database_comm.ItemDatabase;
 import database_comm.UserDatabase;
+import login.AddUserFrame;
 import login.InvalidUsernameOrPasswordException;
 import login.LoginPanel;
+import login.RegisterPanel;
+import login.RemoveUserFrame;
 import login.SecurityHelper;
 import retail.AddProductFrame;
-import retail.AddUserFrame;
 import retail.Cart;
 import retail.CheckoutFrame;
 import retail.Item;
 import retail.ItemVoidFrame;
-import retail.RegisterPanel;
 import retail.RemoveProductFrame;
-import retail.RemoveUserFrame;
 import login.User;
 
 

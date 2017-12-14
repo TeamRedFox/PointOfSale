@@ -1,4 +1,4 @@
-package retail;
+package login;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import database_comm.UserDatabase;
-import login.SecurityHelper;
-import login.User;
 
 public class AddUserFrame extends JFrame {
 	

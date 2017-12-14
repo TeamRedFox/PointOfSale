@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import login.RegisterPanel;
+
 public class Cart extends JPanel {
 	
 	public static ArrayList<Item> list;
