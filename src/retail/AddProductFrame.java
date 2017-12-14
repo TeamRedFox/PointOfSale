@@ -174,7 +174,8 @@ public class AddProductFrame {
 			addItem(Name, Barcode, Description, finalCost, Taxable);
 		}
 		else {
-			JOptionPane.showMessageDialog(null, error);
+			error = error.substring(0, error.length() - 3);
+			JOptionPane.showMessageDialog(null, "Invalid Entry: " + error);
 		}
 
 		Item.setAlwaysOnTop(true);
