@@ -131,19 +131,28 @@ public class RemoveProductFrame {
 	
 	
 	public Boolean validBarcode() {
-		if (Barcode.length() >= 6 && Barcode.length() < 12) {
-			
-			if(Barcode.equals(Barcode2)) {
-				return true;
-			} else {
-				
-				error = error + "Barcodes do not match | ";
-				return false;
-			}
-		} else {
-			error = error + "Invalid Entry | ";
+		error = "";
+		
+		if (!Barcode.equals(Barcode2)) {
+			error = "Barcodes do not match";
 			return false;
 		}
 		
+		if (Barcode.isEmpty()) {
+			error = "Invalid barcode";
+			return false;
+		}	
+		
+		try {
+			if (ItemDatabase.getItemFromBarcode(Barcode) == null) {
+				error = "Item not found";
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 }
