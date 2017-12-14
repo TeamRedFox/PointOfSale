@@ -50,7 +50,8 @@ public class ItemVoidFrame extends JFrame {
 		
 		JButton enter = new JButton("Void Item");
 		buttons.add(enter);
-		enter.addActionListener(new ActionListener() {
+		
+		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				Item.setAlwaysOnTop(false);
@@ -66,7 +67,9 @@ public class ItemVoidFrame extends JFrame {
 				Item.dispose();
 				cart.requestItemSearchFocus();
 			}
-		});
+		};
+		enter.addActionListener(listener);
+		input.addActionListener(listener);
 		
 		Panel combo = new Panel();
 		combo.setLayout(new BorderLayout());
