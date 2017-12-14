@@ -216,7 +216,7 @@ public class AddProductFrame {
 			finalCost = cost.intValue();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			error = error + "Invalid Price | ";
 		}
 	}
