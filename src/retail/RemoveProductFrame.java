@@ -100,8 +100,8 @@ public class RemoveProductFrame {
 	}
 	
 	public void deleteItem(String barcode) {
-		// TODO Auto-generated method stub
-		
+		ItemR.setAlwaysOnTop(false);
+
 		if(validBarcode() == true) {
 			Object[] options = { "Yes", "No" };
 		    int n = JOptionPane.showOptionDialog(new JFrame(),
@@ -125,7 +125,8 @@ public class RemoveProductFrame {
 			JOptionPane.showMessageDialog(null, error);
 		}
 		
-		
+
+		ItemR.setAlwaysOnTop(false);
 	}
 	
 	
