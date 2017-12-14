@@ -5,7 +5,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +33,8 @@ public class LoginPanel extends JPanel {
 	JPasswordField passwordTxt = new JPasswordField(10);
 	JButton signInBtn = new JButton("Sign In");
 	JLabel errorLbl = new JLabel();
+
+	private BufferedImage logoImage;
 	
 	private static String message = "\nWelcome to TeamRedFox's POS System \n Enter your user credentials below!";
 	private static final int START_ROWS = 5;
@@ -76,6 +83,20 @@ public class LoginPanel extends JPanel {
 		
 		this.add(infoPanel, BorderLayout.SOUTH);
 	
+		addImage();
+	}
+
+	
+	void addImage()
+	{
+		try {
+			logoImage = ImageIO.read(new File("logo.png"));
+			JLabel logoLabel = new JLabel(new ImageIcon(logoImage));
+			this.add(logoLabel);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public JTextField getUsernameTxt() {
